@@ -1,10 +1,11 @@
 import React from 'react';
 import Radium from 'radium';
-
+import BurgerIngredients from './BurgerIngredients/BurgerIngredients';
+import BurgerStyle from './BurgerStyle';
 const burger =(props)=>{
   const burgerWindowStyle={
     width:'100%',
-    height:'250px',
+    height:'300px',
     margin:'auto',
     textAlign:'center',
     textWeight:'bold',
@@ -25,12 +26,19 @@ const burger =(props)=>{
       width:'400px',
       height:'400px',
       },
-
-
   };
+
+  const ingredientComponent = Object.keys(props.ingredients).map((ingredientName)=>{
+    return [...Array(props.ingredients[ingredientName])].map((_,index)=>{
+      return <BurgerIngredients type={ingredientName} key={ingredientName+index}/>;
+    });
+  });
   return (
-    <div style={burgerWindowStyle}>
-    </div>
+      <div style ={burgerWindowStyle}>
+        <BurgerIngredients type="BreadTop"/>
+        {ingredientComponent}
+        <BurgerIngredients type="BreadBottom"/>
+      </div>
   );
 }
 
