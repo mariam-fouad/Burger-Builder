@@ -1,14 +1,13 @@
 import React from 'react';
 import Radium from 'radium';
 import BurgerIngredients from './BurgerIngredients/BurgerIngredients';
-import BurgerStyle from './BurgerStyle';
 const burger =(props)=>{
   const burgerWindowStyle={
     width:'100%',
     height:'300px',
     margin:'auto',
     textAlign:'center',
-    textWeight:'bold',
+    fontWeight:'bold',
     overflow:'scroll',
     textSize:'1.2rem',
     '@media (min-width: 1000px) and (min-height: 700px)':
@@ -28,11 +27,16 @@ const burger =(props)=>{
       },
   };
 
-  const ingredientComponent = Object.keys(props.ingredients).map((ingredientName)=>{
+  let ingredientComponent = Object.keys(props.ingredients).map((ingredientName)=>{
     return [...Array(props.ingredients[ingredientName])].map((_,index)=>{
       return <BurgerIngredients type={ingredientName} key={ingredientName+index}/>;
     });
-  });
+  }).reduce((cumulativeArray,currentElement)=>{
+    return cumulativeArray.concat(currentElement);
+  },[]);
+  if (ingredientComponent.length===0){
+    ingredientComponent= <p>Please add some ingredients </p>;
+  }
   return (
       <div style ={burgerWindowStyle}>
         <BurgerIngredients type="BreadTop"/>
