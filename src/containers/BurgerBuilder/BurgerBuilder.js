@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import Burger from '../../components/Burger/Burger'
+import Burger from '../../components/Burger/Burger';
+import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+const INGREDIENTS_PRICES ={
+  Salad:0.3,
+  Bacon:0.7,
+  Cheese:0.4,
+  Meat:1.3,
+};
 class BurgerBuilder extends Component {
   state={
     ingredients:{
@@ -8,12 +15,50 @@ class BurgerBuilder extends Component {
       Cheese:0,
       Meat:0,
     },
+    totalPrice:2,
+  }
+  removeIngredientHandler =(type)=>{
+    const typeQuantity= this.state.ingredients[type];
+    const updatedIngredients={
+      ...this.state.ingredients,
+    };
+    if(typeQuantity-1>=0){
+      updatedIngredients[type]=typeQuantity-1;
+    }
+    else{
+      return;
+    }
+    const newTotalPrice = this.state.totalPrice-INGREDIENTS_PRICES[type];
+    this.setState({
+      ingredients:updatedIngredients,
+      totalPrice:newTotalPrice,
+    });
+  }
+  addIngredientHandler=(type)=>{
+    const typeQuantity= this.state.ingredients[type];
+    const updatedIngredients={
+      ...this.state.ingredients,
+    };
+    updatedIngredients[type]=typeQuantity+1;
+    const newTotalPrice = this.state.totalPrice+INGREDIENTS_PRICES[type];
+    this.setState({
+      ingredients:updatedIngredients,
+      totalPrice:newTotalPrice,
+    });
   }
   render(){
+    const ingredientsDisableInfo = {...this.state.ingredients};
+    for (let key in ingredientsDisableInfo ){
+      ingredientsDisableInfo[key]=ingredientsDisableInfo[key]<=0;
+    }
     return(
       <React.Fragment>
         <Burger ingredients = {this.state.ingredients}/>
-        <div>Building controls</div>
+        <BuildControls
+        labelsAndDisables={ingredientsDisableInfo}
+        remove={this.removeIngredientHandler}
+        add={this.addIngredientHandler}
+        price={this.state.totalPrice}/>
       </React.Fragment>
     );
   }
