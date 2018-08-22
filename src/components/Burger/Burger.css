@@ -1,0 +1,12 @@
+buildControlsStyle:{
+  width:100%;
+  backgroundColor:rgb(16, 20, 25);
+  display:flex;
+  flexFlow:column;
+  alignItems:center;
+  boxShadow:0 2px 1 px #ccc;
+  margin:auto;
+  padding:10px 0;
+  color:#e3dede;
+  fontSize:20px;
+}
