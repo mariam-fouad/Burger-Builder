@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 const INGREDIENTS_PRICES ={
   Salad:0.3,
   Bacon:0.7,
@@ -16,6 +18,7 @@ class BurgerBuilder extends Component {
       Meat:0,
     },
     totalPrice:2,
+    checkingOut : false,
   }
   removeIngredientHandler =(type)=>{
     const typeQuantity= this.state.ingredients[type];
@@ -46,6 +49,15 @@ class BurgerBuilder extends Component {
       totalPrice:newTotalPrice,
     });
   }
+  checkingOut =()=>{
+    this.setState({checkingOut:true});
+  }
+  cancelingCheckOutHandler =()=>{
+    this.setState({checkingOut:false});
+  }
+  continueCheckOutHandler=()=>{
+
+  }
   render(){
     const ingredientsDisableInfo = {...this.state.ingredients};
     let countIngredient= 0;
@@ -54,16 +66,23 @@ class BurgerBuilder extends Component {
       ingredientsDisableInfo[key]=ingredientsDisableInfo[key]<=0;
     }
     const canCheckout = countIngredient>0 ? false : true;
-    console.log(canCheckout);
     return(
       <React.Fragment>
+        <Modal show={this.state.checkingOut} clickModal={this.cancelingCheckOutHandler}>
+          <OrderSummary
+          ingredients ={this.state.ingredients}
+          continue={this.continueCheckOutHandler}
+          cancel={this.cancelingCheckOutHandler}
+          price={this.state.totalPrice}/>
+        </Modal>
         <Burger ingredients = {this.state.ingredients}/>
         <BuildControls
         labelsAndDisables={ingredientsDisableInfo}
         remove={this.removeIngredientHandler}
         add={this.addIngredientHandler}
         price={this.state.totalPrice}
-        canCheckout={canCheckout}/>
+        canCheckout={canCheckout}
+        ordering={this.checkingOut}/>
       </React.Fragment>
     );
   }

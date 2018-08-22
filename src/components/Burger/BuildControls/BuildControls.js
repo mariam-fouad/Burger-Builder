@@ -14,9 +14,13 @@ const buildControls =(props)=>{
   });
   return (
     <div className ={classes.buildControlsStyle}>
-      <p>Current price : <strong>{props.price.toFixed(2)}</strong></p>
+      <p>Current price : <strong>{props.price.toFixed(2)}$</strong></p>
       {buildControlsArray}
-      <button className={classes.OrderButton} disabled={props.canCheckout}>Check out</button>
+      <button
+      className={classes.OrderButton}
+      disabled={props.canCheckout}
+      onClick={props.ordering}>
+      Order Now</button>
     </div>
   );
 }
