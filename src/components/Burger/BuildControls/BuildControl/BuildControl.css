@@ -1,0 +1,51 @@
+.buildControlStyle {
+  display: flex;
+  justify-content: center;
+  text-align:center;
+  align-items: center;
+  margin: 6px 0;
+}
+.buildControlStyle Button{
+  display: block;
+  fontStyle: inherit;
+  padding: 5px;
+  margin: 0 5px;
+  width: 80px;
+  height:35px;
+  border: 1px solid rgb(132, 74, 76);
+  cursor: pointer;
+  outline: none;
+  border-radius: 10%;
+  font-size: 16px;
+}
+.buildControlStyle Button :disabled{
+    background-color: rgb(157, 115, 115);
+    border: 1px solid #7E7365;
+    color: black;
+    cursor: default;
+    }
+.buildControlStyle button:hover:disabled{
+    background-color: rgb(157, 115, 115);
+    color: #ccc;
+    cursor: not-allowed;
+  }
+
+.labelStyle{
+  padding: 10px;
+  font-weight: bold;
+  width: 80px;
+  color:#e3dede;
+  font-size:20px;
+}
+.buildControlStyle .more{
+  background-color: rgb(238, 200, 201);
+}
+.buildControlStyle .more:active ,.buildControlStyle .more:hover{
+  background-color: rgb(169, 101, 103);
+}
+.buildControlStyle .less{
+  background-color: rgb(238, 200, 201);
+}
+.buildControlStyle .less:active ,.buildControlStyle .less:hover{
+  background-color: rgb(169, 101, 103);
+}

@@ -48,9 +48,13 @@ class BurgerBuilder extends Component {
   }
   render(){
     const ingredientsDisableInfo = {...this.state.ingredients};
+    let countIngredient= 0;
     for (let key in ingredientsDisableInfo ){
+      countIngredient+=ingredientsDisableInfo[key];
       ingredientsDisableInfo[key]=ingredientsDisableInfo[key]<=0;
     }
+    const canCheckout = countIngredient>0 ? false : true;
+    console.log(canCheckout);
     return(
       <React.Fragment>
         <Burger ingredients = {this.state.ingredients}/>
@@ -58,7 +62,8 @@ class BurgerBuilder extends Component {
         labelsAndDisables={ingredientsDisableInfo}
         remove={this.removeIngredientHandler}
         add={this.addIngredientHandler}
-        price={this.state.totalPrice}/>
+        price={this.state.totalPrice}
+        canCheckout={canCheckout}/>
       </React.Fragment>
     );
   }
