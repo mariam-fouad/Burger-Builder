@@ -1,13 +1,14 @@
 import React from 'react';
 import Radium from 'radium';
+import Toolbar from '../Navigation/Toolbar/Toolbar';
 
 const Layout=(props)=>{
   const styleMain ={
-    margin:'16px',
+    marginTop:'72px',
   }
   return (
     <React.Fragment>
-      <div >toolbar , sideDrower , backdrop</div>
+      <Toolbar />
       <main style ={styleMain}>
         {props.children}
       </main>

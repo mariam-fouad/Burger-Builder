@@ -17,6 +17,7 @@
   outline: none;
   border-radius: 3%;
   font-size: 16px;
+  background-color: rgb(193, 151, 71);
 }
 .buildControlStyle Button :disabled{
     background-color: #C7C6C6;
@@ -34,18 +35,10 @@
   padding: 10px;
   font-weight: bold;
   width: 80px;
-  color:#e3dede;
+  color:#d1caaa;
   font-size:20px;
 }
-.buildControlStyle .more{
-  background-color: rgb(245, 228, 228);
-}
-.buildControlStyle .more:active ,.buildControlStyle .more:hover{
-  background-color: rgb(169, 101, 103);
-}
-.buildControlStyle .less{
-  background-color: rgb(245, 228, 228);
-}
-.buildControlStyle .less:active ,.buildControlStyle .less:hover{
-  background-color: rgb(169, 101, 103);
+
+.buildControlStyle button:active ,.buildControlStyle button:hover{
+  background-color: rgb(255, 218, 110);
 }

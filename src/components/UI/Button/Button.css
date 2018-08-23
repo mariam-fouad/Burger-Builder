@@ -8,7 +8,7 @@
     margin: 10px;
     font-weight: bold;
     border-radius: 3%;
-    background-color: rgb(245, 228, 228);
+    background-color: rgb(253, 234, 181);
 }
 
 .Button:first-of-type {
@@ -16,5 +16,5 @@
     padding-left: 0;
 }
 .Button:hover{
-  background-color: rgb(169, 101, 103);
+  background-color: rgb(255, 218, 110);
 }

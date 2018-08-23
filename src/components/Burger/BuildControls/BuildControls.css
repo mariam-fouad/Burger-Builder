@@ -7,11 +7,11 @@
   box-shadow:0 2px 1px #ccc;
   margin:auto;
   padding:10px 0;
-  color:#e3dede;
+  color:#d1caaa;
   font-size:20px;
 }
 .OrderButton {
-    background-color: rgb(245, 228, 228);
+    background-color: rgb(193, 151, 71);
     outline: none;
     cursor: pointer;
     border: 1px solid #56161d;
@@ -22,10 +22,11 @@
     box-shadow: 2px 2px 2px #5a5549;
     margin-top: 20px;
     margin-bottom: 20px;
+    border-radius: 3%;
 }
 
 .OrderButton:hover, .OrderButton:active {
-    background-color: rgb(192, 117, 119);
+    background-color: rgb(255, 218, 110);
     border: 1px solid #352f22;
     color: #1d1818;
     font-size: 30px;
