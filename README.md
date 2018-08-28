@@ -1,9 +1,8 @@
-<strong>Burger Builder</strong>
-This app let you build your desired burger
-It uses React.js with css models and some inline styling
+<h1>Burger Builder</h1>
+<p>Written with React.js styled with css models and some inline styling.</p>
 
-Dependency
-To run this project you need 
+<h2>Dependency</h2>
+<p>To run this project you need</p>
 <ul>
     <li>npm server</li>
     <li>node_models</li>
