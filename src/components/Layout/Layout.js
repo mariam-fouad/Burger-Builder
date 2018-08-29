@@ -1,19 +1,34 @@
-import React from 'react';
-import Radium from 'radium';
+import React,{Component}from 'react';
 import Toolbar from '../Navigation/Toolbar/Toolbar';
-
-const Layout=(props)=>{
-  const styleMain ={
-    marginTop:'72px',
+import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
+class Layout extends Component{
+  state={
+    showSideDrawer: false,
   }
-  return (
-    <React.Fragment>
-      <Toolbar />
-      <main style ={styleMain}>
-        {props.children}
-      </main>
-    </React.Fragment>
-  );
+
+  closeSideDrawerHandler=()=>{
+    this.setState({showSideDrawer: false});
+  }
+  toogleSideDrawerHandler=()=>{
+    this.setState((prevState)=>{
+      return {showSideDrawer:!prevState.showSideDrawer};
+    });
+  }
+  render(){
+    const styleMain ={
+      marginTop:'72px',
+    }
+    return (
+      <React.Fragment>
+        <Toolbar toogle={this.toogleSideDrawerHandler} />
+        <SideDrawer toogle={this.toogleSideDrawerHandler} closed={this.closeSideDrawerHandler} show={this.state.showSideDrawer}/>
+        <main style ={styleMain}>
+          {this.props.children}
+        </main>
+      </React.Fragment>
+    );
+  }
+
 }
 
-export default Radium(Layout);
+export default Layout;
