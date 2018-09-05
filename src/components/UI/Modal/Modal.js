@@ -5,7 +5,7 @@ class Modal extends Component{
 
   //only render the modal when it is necessry
   shouldComponentUpdate(nextProps,nextState){
-    return this.props.show!==nextProps.show;
+    return this.props.show!==nextProps.show || this.props.children !== nextProps.children;
   }
   render(){
     const animateModal ={

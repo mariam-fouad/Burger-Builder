@@ -3,6 +3,7 @@ import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import axios from '../../order-axios';
 const INGREDIENTS_PRICES ={
   Salad:0.3,
@@ -20,6 +21,7 @@ class BurgerBuilder extends Component {
     },
     totalPrice:2,
     checkingOut : false,
+    loading: false,
   }
   removeIngredientHandler =(type)=>{
     const typeQuantity= this.state.ingredients[type];
@@ -57,6 +59,7 @@ class BurgerBuilder extends Component {
     this.setState({checkingOut:false});
   }
   continueCheckOutHandler=()=>{
+    this.setState({loading:true});
     const orderInfo ={
       ingredients: this.state.ingredients,
       price : this.state.totalPrice,
@@ -75,10 +78,10 @@ class BurgerBuilder extends Component {
     };
     axios.post('/orders.json',orderInfo)
       .then (response =>{
-        console.log(response);
+        this.setState({loading:false,checkingOut:false});
       })
       .catch (error =>{
-        console.log(error);
+        this.setState({loading:false,checkingOut:false});
       });
   }
   render(){
@@ -89,14 +92,18 @@ class BurgerBuilder extends Component {
       ingredientsDisableInfo[key]=ingredientsDisableInfo[key]<=0;
     }
     const canCheckout = countIngredient>0 ? false : true;
+    let modalInside = <OrderSummary
+      ingredients ={this.state.ingredients}
+      continue={this.continueCheckOutHandler}
+      cancel={this.cancelingCheckOutHandler}
+      price={this.state.totalPrice}/>;
+    if (this.state.loading){
+      modalInside=<Spinner />;
+    }
     return(
       <React.Fragment>
         <Modal show={this.state.checkingOut} clickModal={this.cancelingCheckOutHandler}>
-          <OrderSummary
-          ingredients ={this.state.ingredients}
-          continue={this.continueCheckOutHandler}
-          cancel={this.cancelingCheckOutHandler}
-          price={this.state.totalPrice}/>
+          {modalInside}
         </Modal>
         <Burger ingredients = {this.state.ingredients}/>
         <BuildControls
