@@ -6,5 +6,6 @@
 <ul>
     <li>npm server</li>
     <li>node_models</li>
+    <li>axios</li>
     <li>propTypes</li>
 </ul>
