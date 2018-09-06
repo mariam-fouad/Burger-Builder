@@ -14,16 +14,24 @@ const INGREDIENTS_PRICES ={
 };
 class BurgerBuilder extends Component {
   state={
-    ingredients:{
-      Salad:0,
-      Bacon:0,
-      Cheese:0,
-      Meat:0,
-    },
+    ingredients:null,
     totalPrice:2,
     checkingOut : false,
     loading: false,
+    error: false,
   }
+  constructor(props){
+    super(props);
+    axios.get('/ingredients.json')
+      .then (response=>{
+        this.setState({ingredients:response.data});
+      }).catch(error =>{
+        this.setState({error:true});
+    });
+  }
+  // componentDidMount(){
+  //  can also intialize ingredients here
+  // }
   removeIngredientHandler =(type)=>{
     const typeQuantity= this.state.ingredients[type];
     const updatedIngredients={
@@ -77,7 +85,7 @@ class BurgerBuilder extends Component {
           },
       },
     };
-    axios.post('/orders',orderInfo)
+    axios.post('/orders.json',orderInfo)
       .then (response =>{
         this.setState({loading:false,checkingOut:false});
       })
@@ -93,27 +101,35 @@ class BurgerBuilder extends Component {
       ingredientsDisableInfo[key]=ingredientsDisableInfo[key]<=0;
     }
     const canCheckout = countIngredient>0 ? false : true;
-    let modalInside = <OrderSummary
-      ingredients ={this.state.ingredients}
-      continue={this.continueCheckOutHandler}
-      cancel={this.cancelingCheckOutHandler}
-      price={this.state.totalPrice}/>;
+    let insideModal = null;
+    let burger = this.state.error ? <p>Ingredients cannot be loaded</p>:<Spinner />;
+    if (this.state.ingredients){
+      burger = (
+        <React.Fragment>
+          <Burger ingredients = {this.state.ingredients}/>
+          <BuildControls
+          labelsAndDisables={ingredientsDisableInfo}
+          remove={this.removeIngredientHandler}
+          add={this.addIngredientHandler}
+          price={this.state.totalPrice}
+          canCheckout={canCheckout}
+          ordering={this.checkingOut}/>
+        </React.Fragment>);
+      insideModal= <OrderSummary
+        ingredients ={this.state.ingredients}
+        continue={this.continueCheckOutHandler}
+        cancel={this.cancelingCheckOutHandler}
+        price={this.state.totalPrice}/>;
+    }
     if (this.state.loading){
-      modalInside=<Spinner />;
+      insideModal=<Spinner />;
     }
     return(
       <React.Fragment>
         <Modal show={this.state.checkingOut} clickModal={this.cancelingCheckOutHandler}>
-          {modalInside}
+          {insideModal}
         </Modal>
-        <Burger ingredients = {this.state.ingredients}/>
-        <BuildControls
-        labelsAndDisables={ingredientsDisableInfo}
-        remove={this.removeIngredientHandler}
-        add={this.addIngredientHandler}
-        price={this.state.totalPrice}
-        canCheckout={canCheckout}
-        ordering={this.checkingOut}/>
+        {burger}
       </React.Fragment>
     );
   }

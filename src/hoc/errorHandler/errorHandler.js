@@ -8,18 +8,29 @@ const errorHandler =(WrapedComponents , axios)=>{
     errorConfirmedHandler = ()=>{
       this.setState({error:null});
     }
-    componentDidMount(){
-      axios.interceptors.response.use (res=>res , error=>{
-        this.setState({error:error});
-        return error;
+    //not recommended anymore 
+    // componentWillMount () {
+    //     axios.interceptors.request.use(req => {
+    //         this.setState({error: null});
+    //         return req;
+    //     });
+    //     axios.interceptors.response.use(res => res, error => {
+    //         this.setState({error: error});
+    //     });
+    // }
+
+    errorInterceptors=()=>{
+      axios.interceptors.request.use(req => {
+          this.setState({error: null});
+          return req;
       });
-      axios.interceptors.request.use (req=>{
-        this.setState({error:null});
-        return req;
+      axios.interceptors.response.use(res => res, error => {
+          this.setState({error: error});
       });
     }
 
     render (){
+      this.errorInterceptors();
       return (
         <React.Fragment>
           <Modal show={this.state.error}
