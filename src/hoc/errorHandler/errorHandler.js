@@ -8,7 +8,7 @@ const errorHandler =(WrapedComponents , axios)=>{
     errorConfirmedHandler = ()=>{
       this.setState({error:null});
     }
-    //not recommended anymore 
+    //not recommended anymore
     // componentWillMount () {
     //     axios.interceptors.request.use(req => {
     //         this.setState({error: null});
@@ -18,13 +18,18 @@ const errorHandler =(WrapedComponents , axios)=>{
     //         this.setState({error: error});
     //     });
     // }
-
+    componentWillUnmount(){
+      //to remove the interceptors when the component is
+      //not showing anymore to save memory
+      axios.interceptors.request.eject(this.reqInterceptors);
+      axios.interceptors.response.eject(this.resInterceptors);
+    }
     errorInterceptors=()=>{
-      axios.interceptors.request.use(req => {
+      this.reqInterceptors=axios.interceptors.request.use(req => {
           this.setState({error: null});
           return req;
       });
-      axios.interceptors.response.use(res => res, error => {
+      this.resInterceptors=axios.interceptors.response.use(res => res, error => {
           this.setState({error: error});
       });
     }
