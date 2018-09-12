@@ -3,7 +3,7 @@ import './App.css';
 import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 import Radium ,{StyleRoot}from 'radium';
-
+import Checkout from './containers/Checkout/Checkout'
 class App extends Component {
   render() {
     return (
@@ -12,6 +12,7 @@ class App extends Component {
           <Layout>
             <BurgerBuilder/>
           </Layout>
+          <Checkout/>
         </div>
       </StyleRoot>
     );
