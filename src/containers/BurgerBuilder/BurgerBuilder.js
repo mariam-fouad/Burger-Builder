@@ -24,7 +24,14 @@ class BurgerBuilder extends Component {
     super(props);
     axios.get('/ingredients.json')
       .then (response=>{
-        this.setState({ingredients:response.data});
+        const ingredients=response.data;
+        const orderdIngredients = {
+          Salad:ingredients.Salad,
+          Bacon:ingredients.Bacon,
+          Cheese:ingredients.Cheese,
+          Meat:ingredients.Meat,
+        };
+        this.setState({ingredients:orderdIngredients});
       }).catch(error =>{
         this.setState({error:true});
     });
@@ -99,7 +106,11 @@ class BurgerBuilder extends Component {
     //   .catch (error =>{
     //     this.setState({loading:false,checkingOut:false});
     //   });
-      this.props.history.push({pathname: '/Checkout'});
+      //this.props.history.push('/checkout',{...this.state});
+      this.props.history.push('/checkout',{
+        ingredients:{...this.state.ingredients},
+        totalPrice:this.state.totalPrice
+      });
 
   }
 
