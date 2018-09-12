@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter , Switch , Route} from 'react-router-dom'
+import { Switch , Route} from 'react-router-dom'
 import './App.css';
 import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
@@ -8,18 +8,16 @@ import Checkout from './containers/Checkout/Checkout'
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
         <StyleRoot>
           <div className="App">
             <Layout>
               <Switch>
-                <Route exact path="/Checkout" component={Checkout}/>
+                <Route  path="/checkout" component={Checkout}/>
                 <Route exact path="/" component={BurgerBuilder}/>
               </Switch>
             </Layout>
           </div>
         </StyleRoot>
-      </BrowserRouter>
     );
   }
 }

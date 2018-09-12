@@ -29,9 +29,15 @@ class BurgerBuilder extends Component {
         this.setState({error:true});
     });
   }
+  //can do it like that too
   // componentDidMount(){
-  //  can also intialize ingredients here
-  // }
+  //   axios.get('/ingredients.json')
+  //     .then (response=>{
+  //       this.setState({ingredients:response.data});
+  //     }).catch(error =>{
+  //       this.setState({error:true});
+  //   });
+  //  }
   removeIngredientHandler =(type)=>{
     const typeQuantity= this.state.ingredients[type];
     const updatedIngredients={
@@ -68,31 +74,35 @@ class BurgerBuilder extends Component {
     this.setState({checkingOut:false});
   }
   continueCheckOutHandler=()=>{
-    this.setState({loading:true});
-    const orderInfo ={
-      ingredients: this.state.ingredients,
-      price : this.state.totalPrice,
-      customer :{
-          name:'Mariam Ali',
-          email:'mo@mo.com',
-          phone :'0508157870',
-          address:{
-            street :'205/20',
-            zipCode :'29343',
-            floor : 7,
-            apartment : 48,
-            city :'izmir',
-          },
-      },
-    };
-    axios.post('/orders.json',orderInfo)
-      .then (response =>{
-        this.setState({loading:false,checkingOut:false});
-      })
-      .catch (error =>{
-        this.setState({loading:false,checkingOut:false});
-      });
+    // this.setState({loading:true});
+    // const orderInfo ={
+    //   ingredients: this.state.ingredients,
+    //   price : this.state.totalPrice,
+    //   customer :{
+    //       name:'Mariam Ali',
+    //       email:'mo@mo.com',
+    //       phone :'0508157870',
+    //       address:{
+    //         street :'205/20',
+    //         zipCode :'29343',
+    //         floor : 7,
+    //         apartment : 48,
+    //         city :'izmir',
+    //       },
+    //   },
+    // };
+    // axios.post('/orders.json',orderInfo)
+    //   .then (response =>{
+    //     this.setState({loading:false,checkingOut:false});
+    //
+    //   })
+    //   .catch (error =>{
+    //     this.setState({loading:false,checkingOut:false});
+    //   });
+      this.props.history.push({pathname: '/Checkout'});
+
   }
+
   render(){
     const ingredientsDisableInfo = {...this.state.ingredients};
     let countIngredient= 0;
