@@ -4,12 +4,7 @@ import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSumm
 import ContactData from './ContactData/ContactData';
 class Checkout extends Component{
   state={
-    ingredients:{
-      Meat:0,
-      Salad:0,
-      Cheese:0,
-      Bacon:0,
-    },
+    ingredients:null,
     price:0.0,
   }
 
@@ -19,11 +14,11 @@ class Checkout extends Component{
   checkoutContinueHandler=()=>{
     this.props.history.replace('/checkout/contact-data');
   }
-  componentDidMount(){
+  componentWillMount(){
     const convertState = this.props.location.state;
     this.setState({
       ingredients:{...convertState.ingredients},
-      price:convertState.totalPrice,
+      price:convertState.totalPrice.toFixed(2),
     });
   }
   render(){
@@ -34,7 +29,11 @@ class Checkout extends Component{
           ingredients={this.state.ingredients}
           checkoutCancal={this.checkoutCancalHandler}
           checkoutContinue={this.checkoutContinueHandler}/>
-          <Route path={this.props.match.path+"/contact-data"} component={ContactData}/>
+          <Route path={this.props.match.path+"/contact-data"}
+          render={(props)=>(<ContactData
+            {...props}
+            price= {this.state.price}
+            ingredients={this.state.ingredients}/>) }/>
       </div>
     )
   }
