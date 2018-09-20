@@ -9,6 +9,12 @@ const Input= (props)=>{
     case ('teaxtarea'):
       inputElement= <teaxtarea className={classes.InputElement}{...props.elementConfig}/>;
       break;
+    case ('select'):
+      inputElement=(
+        <select className={classes.InputElement}>
+          {props.options.map(option=> <option value={option.value}>{option.displayValue}</option>)}
+        </select>)
+
     default:
       inputElement = <input className={classes.InputElement}{...props.elementConfig} />;
   }
