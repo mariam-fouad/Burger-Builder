@@ -89,9 +89,14 @@ class ContactData extends Component{
   orderHandler=(event)=>{
     event.preventDefault();
     this.setState({loading:true});
+    const orderDetails={};
+    for (let input in this.state.orderInfo){
+      orderDetails[input]=this.state.orderInfo[input].value;
+    }
     const orderInfo ={
       ingredients: this.props.ingredients,
       price : this.props.price,
+      orderData:orderDetails,
 
     };
     axios.post('/orders.json',orderInfo)
@@ -130,9 +135,9 @@ class ContactData extends Component{
     let content = (
       <React.Fragment>
         <h4>Enter your Contact Data</h4>
-        <form>
+        <form onSubmit={this.orderHandler}>
           {formArray}
-          <Button click={this.orderHandler}>ORDER</Button>
+          <Button>ORDER</Button>
         </form>
       </React.Fragment>
     );
