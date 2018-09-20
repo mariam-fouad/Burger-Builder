@@ -50,10 +50,10 @@ class ContactData extends Component{
       <React.Fragment>
         <h4>Enter your Contact Data</h4>
         <form>
-          <Input inputtype='input' type='text' name='name' placeholder='Your Name'/>
-          <Input inputtype='input' type='email' name='email' placeholder='Your Email'/>
-          <Input inputtype='input' type='text' name='street' placeholder='Street'/>
-          <Input inputtype='input' type='text' name='postalcode' placeholder='postal code'/>
+          <Input inputtype='input' label='Name' type='text' name='name' placeholder='Your Name'/>
+          <Input inputtype='input' label='Email' type='email' name='email' placeholder='Your Email'/>
+          <Input inputtype='input' label='Street' type='text' name='street' placeholder='Street'/>
+          <Input inputtype='input' label='Postal Code' type='text' name='postalcode' placeholder='postal code'/>
           <Button click={this.orderHandler}>ORDER</Button>
         </form>
       </React.Fragment>
