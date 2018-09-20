@@ -6,11 +6,73 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 class ContactData extends Component{
   state={
-    name:'',
-    email:'',
-    address:{
-      street:'',
-      postalcode:'',
+    orderInfo:{
+          name:{
+            elementType:'text',
+            label:'Name',
+            elementConfig:{
+              type:'text',
+              placeholder:'Your Name'
+            },
+          },
+          email:{
+            elementType:'text',
+            label:'E-Mail',
+            elementConfig:{
+              type:'email',
+              placeholder:'Your E-Mail'
+            },
+          },
+          phone :{
+            elementType:'text',
+            label:'Phone Number',
+            elementConfig:{
+              type:'tel',
+              placeholder:'Your Number'
+            },
+          },
+          street :{
+            elementType:'text',
+            label:'Street',
+            elementConfig:{
+              type:'text',
+              placeholder:'Street'
+            },
+          },
+          zipCode :{
+            elementType:'text',
+            label:'ZIP Code',
+            elementConfig:{
+              type:'text',
+              placeholder:'ZIP Code'
+            },
+          },
+          floor : {
+            elementType:'text',
+            label:'Floor Number',
+            elementConfig:{
+              type:'number',
+              placeholder:'Floor Number'
+            },
+          },
+          apartment :{
+            elementType:'text',
+            label:'Apartment Number',
+            elementConfig:{
+              type:'number',
+              placeholder:'Apartment Number'
+            },
+          },
+          deliveryType :{
+            elementType:'select',
+            label:'Delivery Option',
+            elementConfig:{
+              options =[
+                {value:'fastest', displayValue:'Fastest'},
+                {value:'cheapest', displayValue:'Cheapest'}
+            ]
+            },
+          },
     },
     loading:false,
   }
@@ -20,18 +82,7 @@ class ContactData extends Component{
     const orderInfo ={
       ingredients: this.props.ingredients,
       price : this.props.price,
-      customer :{
-          name:'Mariam Ali',
-          email:'mo@mo.com',
-          phone :'0508157870',
-          address:{
-            street :'205/20',
-            zipCode :'29343',
-            floor : 7,
-            apartment : 48,
-            city :'izmir',
-          },
-      },
+
     };
     axios.post('/orders.json',orderInfo)
       .then (response =>{
@@ -46,14 +97,12 @@ class ContactData extends Component{
 
   }
   render (){
+    const formInputs
     let content = (
       <React.Fragment>
         <h4>Enter your Contact Data</h4>
         <form>
-          <Input inputtype='input' label='Name' type='text' name='name' placeholder='Your Name'/>
-          <Input inputtype='input' label='Email' type='email' name='email' placeholder='Your Email'/>
-          <Input inputtype='input' label='Street' type='text' name='street' placeholder='Street'/>
-          <Input inputtype='input' label='Postal Code' type='text' name='postalcode' placeholder='postal code'/>
+
           <Button click={this.orderHandler}>ORDER</Button>
         </form>
       </React.Fragment>
