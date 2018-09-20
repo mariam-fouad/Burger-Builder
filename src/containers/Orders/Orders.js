@@ -28,8 +28,12 @@ class Orders extends Component{
   render(){
     return(
       <React.Fragment>
-        <Order/>
-        <Order />
+        {this.state.orders.map(order=>(
+          <Order
+          key={order.id}
+          ingredients={order.ingredients}
+          price={+order.price}/>
+        ))}
       </React.Fragment>
     )
   }
