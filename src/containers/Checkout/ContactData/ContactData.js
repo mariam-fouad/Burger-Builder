@@ -107,7 +107,6 @@ class ContactData extends Component{
   render (){
     const formArray= [];
     for (let input in this.state.orderInfo){
-      if (this.state.orderInfo[input].elementType=='text')
         formArray.push(
           <Input label={this.state.orderInfo[input].label}
           key={this.state.orderInfo[input].label}

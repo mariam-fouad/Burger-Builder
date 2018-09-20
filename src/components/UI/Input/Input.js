@@ -12,9 +12,9 @@ const Input= (props)=>{
     case ('select'):
       inputElement=(
         <select className={classes.InputElement}>
-          {props.options.map(option=> <option value={option.value}>{option.displayValue}</option>)}
-        </select>)
-
+          {props.elementConfig.options.map(option=> <option key={option.value} value={option.value}>{option.displayValue}</option>)}
+        </select>);
+        break;
     default:
       inputElement = <input className={classes.InputElement}{...props.elementConfig} />;
   }
