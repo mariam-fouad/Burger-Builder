@@ -103,8 +103,17 @@ class ContactData extends Component{
       .catch (error =>{
         this.setState({loading:false});
       });
-
-
+  }
+  inputChangedHandler=(event,orderKey)=>{
+    const orderUpdated={
+      ...this.state.orderInfo,
+    };
+    const updatedOrderElement={
+      ...orderUpdated[orderKey],
+    };
+    updatedOrderElement.value=event.target.value;
+    orderUpdated[orderKey]=updatedOrderElement;
+    this.setState({orderInfo:orderUpdated});
   }
   render (){
     const formArray= [];
@@ -115,6 +124,7 @@ class ContactData extends Component{
           elementConfig={this.state.orderInfo[input].elementConfig}
           elementType={this.state.orderInfo[input].elementType}
           value={this.state.orderInfo[input].value}
+          changed={(event)=>this.inputChangedHandler(event,input)}
           /> );
     }
     let content = (
