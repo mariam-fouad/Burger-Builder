@@ -114,6 +114,7 @@ class ContactData extends Component{
           key={this.state.orderInfo[input].label}
           elementConfig={this.state.orderInfo[input].elementConfig}
           elementType={this.state.orderInfo[input].elementType}
+          value={this.state.orderInfo[input].value}
           /> );
     }
     let content = (

@@ -4,19 +4,19 @@ const Input= (props)=>{
   let inputElement = null;
   switch(props.elementType){
     case('input'):
-      inputElement = <input className={classes.InputElement} {...props.elementConfig} />;
+      inputElement = <input className={classes.InputElement} {...props.elementConfig} value={props.value} />;
       break;
     case ('teaxtarea'):
-      inputElement= <teaxtarea className={classes.InputElement}{...props.elementConfig}/>;
+      inputElement= <teaxtarea className={classes.InputElement}{...props.elementConfig} value={props.value}/>;
       break;
     case ('select'):
       inputElement=(
         <select className={classes.InputElement}>
-          {props.elementConfig.options.map(option=> <option key={option.value} value={option.value}>{option.displayValue}</option>)}
+          {props.elementConfig.options.map(option=> <option key={option.value} value={option.value} selected={option.selected}>{option.displayValue}</option>)}
         </select>);
         break;
     default:
-      inputElement = <input className={classes.InputElement}{...props.elementConfig} />;
+      inputElement = <input className={classes.InputElement}{...props.elementConfig} value={props.value} />;
   }
   return (
     <div className={classes.Input}>
