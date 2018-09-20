@@ -57,6 +57,7 @@ class ContactData extends Component{
             label:'Floor Number',
             elementConfig:{
               type:'number',
+              min:"0",
               placeholder:'Floor Number'
             },
             value:'',
@@ -66,6 +67,7 @@ class ContactData extends Component{
             label:'Apartment Number',
             elementConfig:{
               type:'number',
+              min:"0",
               placeholder:'Apartment Number'
             },
             value:'',
