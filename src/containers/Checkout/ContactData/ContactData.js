@@ -14,6 +14,7 @@ class ContactData extends Component{
               type:'text',
               placeholder:'Your Name'
             },
+            value:'',
           },
           email:{
             elementType:'text',
@@ -22,6 +23,7 @@ class ContactData extends Component{
               type:'email',
               placeholder:'Your E-Mail'
             },
+            value:'',
           },
           phone :{
             elementType:'text',
@@ -30,6 +32,7 @@ class ContactData extends Component{
               type:'tel',
               placeholder:'Your Number'
             },
+            value:'',
           },
           street :{
             elementType:'text',
@@ -38,6 +41,7 @@ class ContactData extends Component{
               type:'text',
               placeholder:'Street'
             },
+            value:'',
           },
           zipCode :{
             elementType:'text',
@@ -46,6 +50,7 @@ class ContactData extends Component{
               type:'text',
               placeholder:'ZIP Code'
             },
+            value:'',
           },
           floor : {
             elementType:'text',
@@ -54,6 +59,7 @@ class ContactData extends Component{
               type:'number',
               placeholder:'Floor Number'
             },
+            value:'',
           },
           apartment :{
             elementType:'text',
@@ -62,16 +68,18 @@ class ContactData extends Component{
               type:'number',
               placeholder:'Apartment Number'
             },
+            value:'',
           },
           deliveryType :{
             elementType:'select',
             label:'Delivery Option',
             elementConfig:{
-              options =[
+              options:[
                 {value:'fastest', displayValue:'Fastest'},
                 {value:'cheapest', displayValue:'Cheapest'}
             ]
             },
+            value:'',
           },
     },
     loading:false,
@@ -97,12 +105,21 @@ class ContactData extends Component{
 
   }
   render (){
-    const formInputs
+    const formArray= [];
+    for (let input in this.state.orderInfo){
+      if (this.state.orderInfo[input].elementType=='text')
+        formArray.push(
+          <Input label={this.state.orderInfo[input].label}
+          key={this.state.orderInfo[input].label}
+          elementConfig={this.state.orderInfo[input].elementConfig}
+          elementType={this.state.orderInfo[input].elementType}
+          /> );
+    }
     let content = (
       <React.Fragment>
         <h4>Enter your Contact Data</h4>
         <form>
-
+          {formArray}
           <Button click={this.orderHandler}>ORDER</Button>
         </form>
       </React.Fragment>
