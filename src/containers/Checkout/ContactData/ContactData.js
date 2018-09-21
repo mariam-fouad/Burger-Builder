@@ -119,6 +119,7 @@ class ContactData extends Component{
             ]
             },
             value:'',
+            validation:{},
             valid:true,
           },
     },
@@ -127,14 +128,18 @@ class ContactData extends Component{
   }
   validateInput =(value,rules)=>{
     let isValid = true;
+    const trimedValue = value.trim();
+    if(!rules){
+      return true;
+    }
     if(rules.required){
-      isValid= value.trim()!=='' &&isValid;
+      isValid= trimedValue.trim()!=='' &&isValid;
     }
     if(rules.minLength){
-      isValid= value.length >= rules.minLength &&isValid;
+      isValid= trimedValue.length >= rules.minLength &&isValid;
     }
     if(rules.maxLength){
-      isValid= value.length <= rules.maxLength &&isValid;
+      isValid= trimedValue.length <= rules.maxLength &&isValid;
     }
 
     return isValid;
