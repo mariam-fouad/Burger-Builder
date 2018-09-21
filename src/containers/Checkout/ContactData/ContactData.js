@@ -95,7 +95,7 @@ class ContactData extends Component{
             touched:false,
           },
           apartment :{
-            elementType:'text',
+            elementType:'number',
             label:'Apartment Number',
             elementConfig:{
               type:'number',
@@ -134,6 +134,7 @@ class ContactData extends Component{
     if(rules.maxLength){
       isValid= value.length <= rules.maxLength &&isValid;
     }
+
     return isValid;
   }
   orderHandler=(event)=>{

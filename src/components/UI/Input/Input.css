@@ -26,3 +26,7 @@
   background-color: #ffd1cc;;
   border-color: red;
 }
+.ValidationError {
+    color: red;
+    margin: 5px 0;
+} 
