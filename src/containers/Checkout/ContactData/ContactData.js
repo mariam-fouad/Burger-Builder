@@ -112,10 +112,6 @@ class ContactData extends Component{
             ]
             },
             value:'',
-            validation:{
-              required:true,
-            },
-            valid:false,
           },
     },
     loading:false,
@@ -179,6 +175,8 @@ class ContactData extends Component{
           elementConfig={this.state.orderInfo[input].elementConfig}
           elementType={this.state.orderInfo[input].elementType}
           value={this.state.orderInfo[input].value}
+          invalid={!this.state.orderInfo[input].valid}
+          shouldValidate={this.state.orderInfo[input].validation}
           changed={(event)=>this.inputChangedHandler(event,input)}
           /> );
     }
