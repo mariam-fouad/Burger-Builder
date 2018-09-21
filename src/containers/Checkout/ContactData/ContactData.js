@@ -19,6 +19,7 @@ class ContactData extends Component{
               required:true,
             },
             valid:false,
+            touched:false,
           },
           email:{
             elementType:'text',
@@ -32,6 +33,7 @@ class ContactData extends Component{
               required:true,
             },
             valid:false,
+            touched:false,
           },
           phone :{
             elementType:'text',
@@ -45,6 +47,7 @@ class ContactData extends Component{
               required:true,
             },
             valid:false,
+            touched:false,
           },
           street :{
             elementType:'text',
@@ -58,6 +61,7 @@ class ContactData extends Component{
               required:true,
             },
             valid:false,
+            touched:false,
           },
           zipCode :{
             elementType:'text',
@@ -73,6 +77,7 @@ class ContactData extends Component{
               maxLength:5,
             },
             valid:false,
+            touched:false,
           },
           floor : {
             elementType:'text',
@@ -87,6 +92,7 @@ class ContactData extends Component{
               required:true,
             },
             valid:false,
+            touched:false,
           },
           apartment :{
             elementType:'text',
@@ -101,6 +107,7 @@ class ContactData extends Component{
               required:true,
             },
             valid:false,
+            touched:false,
           },
           deliveryType :{
             elementType:'select',
@@ -119,7 +126,7 @@ class ContactData extends Component{
   validateInput =(value,rules)=>{
     let isValid = true;
     if(rules.required){
-      isValid= value.trim!=='' &&isValid;
+      isValid= value.trim()!=='' &&isValid;
     }
     if(rules.minLength){
       isValid= value.length >= rules.minLength &&isValid;
@@ -160,9 +167,10 @@ class ContactData extends Component{
       ...orderUpdated[orderKey],
     };
     updatedOrderElement.value=event.target.value;
+    updatedOrderElement.touched=true;
     updatedOrderElement.valid=this.validateInput(updatedOrderElement.value,updatedOrderElement.validation);
-    console.log(updatedOrderElement);
     orderUpdated[orderKey]=updatedOrderElement;
+    console.log(orderUpdated);
 
     this.setState({orderInfo:orderUpdated});
   }
@@ -177,6 +185,7 @@ class ContactData extends Component{
           value={this.state.orderInfo[input].value}
           invalid={!this.state.orderInfo[input].valid}
           shouldValidate={this.state.orderInfo[input].validation}
+          touched={this.state.orderInfo[input].touched}
           changed={(event)=>this.inputChangedHandler(event,input)}
           /> );
     }
