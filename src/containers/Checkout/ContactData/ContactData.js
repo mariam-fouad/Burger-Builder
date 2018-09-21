@@ -119,9 +119,11 @@ class ContactData extends Component{
             ]
             },
             value:'',
+            valid:true,
           },
     },
     loading:false,
+    isFormValid:false,
   }
   validateInput =(value,rules)=>{
     let isValid = true;
@@ -137,7 +139,14 @@ class ContactData extends Component{
 
     return isValid;
   }
-  orderHandler=(event)=>{
+  validateForm =()=>{
+    let isFormValid =true;
+    for (let input in this.state.orderInfo){
+      isFormValid = this.state.orderInfo[input].valid && isFormValid;
+    }
+    return isFormValid;
+  }
+  orderButtonHandler=(event)=>{
     event.preventDefault();
     this.setState({loading:true});
     const orderDetails={};
@@ -171,9 +180,9 @@ class ContactData extends Component{
     updatedOrderElement.touched=true;
     updatedOrderElement.valid=this.validateInput(updatedOrderElement.value,updatedOrderElement.validation);
     orderUpdated[orderKey]=updatedOrderElement;
-    console.log(orderUpdated);
+    const isFormValid = this.validateForm();
 
-    this.setState({orderInfo:orderUpdated});
+    this.setState({orderInfo:orderUpdated,isFormValid:isFormValid});
   }
   render (){
     const formArray= [];
