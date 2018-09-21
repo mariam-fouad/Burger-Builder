@@ -18,3 +18,8 @@
 .Button:hover{
   background-color: rgb(255, 218, 110);
 }
+.Button:disabled{
+  background-color: #ccc;
+  cursor: not-allowed;
+  color: black;
+}

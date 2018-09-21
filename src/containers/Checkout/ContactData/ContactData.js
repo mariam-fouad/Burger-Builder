@@ -204,7 +204,7 @@ class ContactData extends Component{
         <h4>Enter your Contact Data</h4>
         <form onSubmit={this.orderHandler}>
           {formArray}
-          <Button>ORDER</Button>
+          <Button disabled={!this.state.isFormValid}>ORDER</Button>
         </form>
       </React.Fragment>
     );
