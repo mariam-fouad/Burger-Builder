@@ -17,15 +17,12 @@ const intialState ={
 const reducer =(state=intialState,action)=>{
   switch(action.type){
     case ADD_INGREDIENT:
-      const ingredientsQuantity= state.ingredients[action.ingredientType];
-      const updatedIngredients={
-        ...state.ingredients,
-      };
-      updatedIngredients[action.ingredientType]=ingredientsQuantity+1;
-      const newTotalPrice = state.totalPrice+INGREDIENTS_PRICES[action.ingredientType];
       return {
-        ingredients:updatedIngredients,
-        totalPrice:newTotalPrice,
+        ingredients:{
+          ...state.ingredients,
+          [action.ingredientType]:state.ingredients[action.ingredientType]+1,
+        },
+        totalPrice:state.totalPrice+INGREDIENTS_PRICES[action.ingredientType],
       }
     case REMOVE_INGREDIENT:
       const typeQuantity= state.ingredients[action.ingredientType];
