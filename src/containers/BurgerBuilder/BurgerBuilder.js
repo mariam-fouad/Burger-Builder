@@ -71,7 +71,7 @@ class BurgerBuilder extends Component {
           <BuildControls
           labelsAndDisables={ingredientsDisableInfo}
           remove={this.props.removeIngredient}
-          add={(type)=>this.props.addIngredient(type)}
+          add={this.props.addIngredient}
           price={this.props.totalPrice}
           canCheckout={canCheckout}
           ordering={this.checkingOut}/>
