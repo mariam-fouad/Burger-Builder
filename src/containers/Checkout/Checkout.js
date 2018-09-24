@@ -22,7 +22,7 @@ class Checkout extends Component{
           checkoutCancal={this.checkoutCancalHandler}
           checkoutContinue={this.checkoutContinueHandler}/>
           <Route path={this.props.match.path+"/contact-data"}
-          render={(props)=>(<ContactData {...props} />) }/>
+          component={ContactData}/>
       </div>
     )
   }
