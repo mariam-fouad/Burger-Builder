@@ -8,12 +8,7 @@ import errorHandler from '../../hoc/errorHandler/errorHandler';
 import axios from '../../order-axios';
 import {connect} from 'react-redux';
 import {ADD_INGREDIENT,DELETE_INGREDIENT} from '../../store/actions';
-const INGREDIENTS_PRICES ={
-  Salad:0.3,
-  Bacon:0.7,
-  Cheese:0.4,
-  Meat:1.3,
-};
+
 class BurgerBuilder extends Component {
   state={
     ingredients:null,
@@ -47,23 +42,41 @@ class BurgerBuilder extends Component {
   //       this.setState({error:true});
   //   });
   //  }
-  removeIngredientHandler =(type)=>{
-    const typeQuantity= this.state.ingredients[type];
-    const updatedIngredients={
-      ...this.state.ingredients,
-    };
-    if(typeQuantity-1>=0){
-      updatedIngredients[type]=typeQuantity-1;
-    }
-    else{
-      return;
-    }
-    const newTotalPrice = this.state.totalPrice-INGREDIENTS_PRICES[type];
-    this.setState({
-      ingredients:updatedIngredients,
-      totalPrice:newTotalPrice,
-    });
-  }
+  // removeIngredientHandler =(type)=>{
+  //   const typeQuantity= this.state.ingredients[type];
+  //   const updatedIngredients={
+  //     ...this.state.ingredients,
+  //   };
+  //   if(typeQuantity-1>=0){
+  //     updatedIngredients[type]=typeQuantity-1;
+  //   }
+  //   else{
+  //     return;
+  //   }
+  //   const newTotalPrice = this.state.totalPrice-INGREDIENTS_PRICES[type];
+  //   this.setState({
+  //     ingredients:updatedIngredients,
+  //     totalPrice:newTotalPrice,
+  //   });
+  // }
+  // // addIngredientHandler=(type)=>{
+  // //   const tremoveIngredientHandler =(type)=>{
+  //   const typeQuantity= this.state.ingredients[type];
+  //   const updatedIngredients={
+  //     ...this.state.ingredients,
+  //   };
+  //   if(typeQuantity-1>=0){
+  //     updatedIngredients[type]=typeQuantity-1;
+  //   }
+  //   else{
+  //     return;
+  //   }
+  //   const newTotalPrice = this.state.totalPrice-INGREDIENTS_PRICES[type];
+  //   this.setState({
+  //     ingredients:updatedIngredients,
+  //     totalPrice:newTotalPrice,
+  //   });
+  // }
   // addIngredientHandler=(type)=>{
   //   const typeQuantity= this.state.ingredients[type];
   //   const updatedIngredients={
@@ -109,7 +122,7 @@ class BurgerBuilder extends Component {
           <BuildControls
           labelsAndDisables={ingredientsDisableInfo}
           remove={this.removeIngredientHandler}
-          add={(type)=>this.props.addIngredient(type,INGREDIENTS_PRICES[type])}
+          add={(type)=>this.props.addIngredient(type)}
           price={this.props.totalPrice}
           canCheckout={canCheckout}
           ordering={this.checkingOut}/>
@@ -143,9 +156,8 @@ const mapStateToProps=state=>{
 
 const mapDispatchToProps=dispatch=>{
   return {
-    addIngredient:(ingredientType,ingredientPrice)=>dispatch({
+    addIngredient:(ingredientType)=>dispatch({
       type:ADD_INGREDIENT,
-      ingredientPrice:ingredientPrice,
       ingredientType:ingredientType
     }),
 
