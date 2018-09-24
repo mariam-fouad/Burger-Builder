@@ -1,4 +1,4 @@
-import {ADD_INGREDIENT,DELETE_INGREDIENT} from '../actions';
+import {ADD_INGREDIENT,REMOVE_INGREDIENT} from '../actions';
 const INGREDIENTS_PRICES ={
   Salad:0.3,
   Bacon:0.7,
@@ -27,7 +27,7 @@ const reducer =(state=intialState,action)=>{
         ingredients:updatedIngredients,
         totalPrice:newTotalPrice,
       }
-    case DELETE_INGREDIENT:
+    case REMOVE_INGREDIENT:
       const typeQuantity= state.ingredients[action.ingredientType];
       const modifiedIngredients={
         ...state.ingredients,

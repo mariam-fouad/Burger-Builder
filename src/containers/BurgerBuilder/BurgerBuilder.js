@@ -7,7 +7,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import errorHandler from '../../hoc/errorHandler/errorHandler';
 import axios from '../../order-axios';
 import {connect} from 'react-redux';
-import {ADD_INGREDIENT,DELETE_INGREDIENT} from '../../store/actions';
+import {ADD_INGREDIENT,REMOVE_INGREDIENT} from '../../store/actions';
 
 class BurgerBuilder extends Component {
   state={
@@ -70,7 +70,7 @@ class BurgerBuilder extends Component {
           <Burger ingredients = {this.props.ingredients}/>
           <BuildControls
           labelsAndDisables={ingredientsDisableInfo}
-          remove={this.props.deleteIngredient}
+          remove={this.props.removeIngredient}
           add={(type)=>this.props.addIngredient(type)}
           price={this.props.totalPrice}
           canCheckout={canCheckout}
@@ -109,8 +109,8 @@ const mapDispatchToProps=dispatch=>{
       type:ADD_INGREDIENT,
       ingredientType:ingredientType
     }),
-    deleteIngredient:(ingredientType)=>dispatch({
-      type:DELETE_INGREDIENT,
+    removeIngredient:(ingredientType)=>dispatch({
+      type:REMOVE_INGREDIENT,
       ingredientType:ingredientType
     })
 
