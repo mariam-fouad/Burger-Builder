@@ -64,18 +64,18 @@ class BurgerBuilder extends Component {
       totalPrice:newTotalPrice,
     });
   }
-  addIngredientHandler=(type)=>{
-    const typeQuantity= this.state.ingredients[type];
-    const updatedIngredients={
-      ...this.state.ingredients,
-    };
-    updatedIngredients[type]=typeQuantity+1;
-    const newTotalPrice = this.state.totalPrice+INGREDIENTS_PRICES[type];
-    this.setState({
-      ingredients:updatedIngredients,
-      totalPrice:newTotalPrice,
-    });
-  }
+  // addIngredientHandler=(type)=>{
+  //   const typeQuantity= this.state.ingredients[type];
+  //   const updatedIngredients={
+  //     ...this.state.ingredients,
+  //   };
+  //   updatedIngredients[type]=typeQuantity+1;
+  //   const newTotalPrice = this.state.totalPrice+INGREDIENTS_PRICES[type];
+  //   this.setState({
+  //     ingredients:updatedIngredients,
+  //     totalPrice:newTotalPrice,
+  //   });
+  // }
   checkingOut =()=>{
     this.setState({checkingOut:true});
   }
@@ -93,7 +93,7 @@ class BurgerBuilder extends Component {
   }
 
   render(){
-    const ingredientsDisableInfo = {...this.state.ingredients};
+    const ingredientsDisableInfo = {...this.props.ingredients};
     let countIngredient= 0;
     for (let key in ingredientsDisableInfo ){
       countIngredient+=ingredientsDisableInfo[key];
@@ -102,23 +102,23 @@ class BurgerBuilder extends Component {
     const canCheckout = countIngredient>0 ? false : true;
     let insideModal = null;
     let burger = this.state.error ? <p>Ingredients cannot be loaded</p>:<Spinner />;
-    if (this.state.ingredients){
+    if (this.props.ingredients){
       burger = (
         <React.Fragment>
-          <Burger ingredients = {this.state.ingredients}/>
+          <Burger ingredients = {this.props.ingredients}/>
           <BuildControls
           labelsAndDisables={ingredientsDisableInfo}
           remove={this.removeIngredientHandler}
-          add={this.addIngredientHandler}
-          price={this.state.totalPrice}
+          add={(type)=>this.props.addIngredient(type,INGREDIENTS_PRICES[type])}
+          price={this.props.totalPrice}
           canCheckout={canCheckout}
           ordering={this.checkingOut}/>
         </React.Fragment>);
       insideModal= <OrderSummary
-        ingredients ={this.state.ingredients}
+        ingredients ={this.props.ingredients}
         continue={this.continueCheckOutHandler}
         cancel={this.cancelingCheckOutHandler}
-        price={this.state.totalPrice}/>;
+        price={this.props.totalPrice}/>;
     }
     if (this.state.loading){
       insideModal=<Spinner />;
