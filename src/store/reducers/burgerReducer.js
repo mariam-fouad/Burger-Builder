@@ -25,21 +25,16 @@ const reducer =(state=intialState,action)=>{
         totalPrice:state.totalPrice+INGREDIENTS_PRICES[action.ingredientType],
       }
     case REMOVE_INGREDIENT:
-      const typeQuantity= state.ingredients[action.ingredientType];
-      const modifiedIngredients={
-        ...state.ingredients,
-      };
-      if(typeQuantity-1>=0){
-        modifiedIngredients[action.ingredientType]=typeQuantity-1;
-      }
-      else{
-        return state;
-      }
-      const updatedTotalPrice = state.totalPrice-INGREDIENTS_PRICES[action.ingredientType];
-      return{
-        ingredients:modifiedIngredients,
-        totalPrice:updatedTotalPrice,
-      };
+      return state.ingredients[action.ingredientType]?
+        {
+          ingredients:{
+            ...state.ingredients,
+            [action.ingredientType]:state.ingredients[action.ingredientType]-1,
+          },
+          totalPrice:state.totalPrice-INGREDIENTS_PRICES[action.ingredientType],
+        }
+        : state;
+
     default:
       return state;
   }
