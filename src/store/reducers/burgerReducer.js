@@ -43,8 +43,9 @@ const reducer =(state=intialState,action)=>{
         ingredients:modifiedIngredients,
         totalPrice:updatedTotalPrice,
       };
-
+    default:
+      return state;
   }
-  return state;
+
 }
 export default reducer;
