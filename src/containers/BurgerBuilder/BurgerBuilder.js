@@ -121,7 +121,7 @@ class BurgerBuilder extends Component {
           <Burger ingredients = {this.props.ingredients}/>
           <BuildControls
           labelsAndDisables={ingredientsDisableInfo}
-          remove={this.removeIngredientHandler}
+          remove={this.props.deleteIngredient}
           add={(type)=>this.props.addIngredient(type)}
           price={this.props.totalPrice}
           canCheckout={canCheckout}
@@ -160,6 +160,10 @@ const mapDispatchToProps=dispatch=>{
       type:ADD_INGREDIENT,
       ingredientType:ingredientType
     }),
+    deleteIngredient:(ingredientType)=>dispatch({
+      type:DELETE_INGREDIENT,
+      ingredientType:ingredientType
+    })
 
   }
 }
