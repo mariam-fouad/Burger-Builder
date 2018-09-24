@@ -11,8 +11,6 @@ import {ADD_INGREDIENT,DELETE_INGREDIENT} from '../../store/actions';
 
 class BurgerBuilder extends Component {
   state={
-    ingredients:null,
-    totalPrice:2,
     checkingOut : false,
     loading: false,
     error: false,
@@ -42,53 +40,7 @@ class BurgerBuilder extends Component {
   //       this.setState({error:true});
   //   });
   //  }
-  // removeIngredientHandler =(type)=>{
-  //   const typeQuantity= this.state.ingredients[type];
-  //   const updatedIngredients={
-  //     ...this.state.ingredients,
-  //   };
-  //   if(typeQuantity-1>=0){
-  //     updatedIngredients[type]=typeQuantity-1;
-  //   }
-  //   else{
-  //     return;
-  //   }
-  //   const newTotalPrice = this.state.totalPrice-INGREDIENTS_PRICES[type];
-  //   this.setState({
-  //     ingredients:updatedIngredients,
-  //     totalPrice:newTotalPrice,
-  //   });
-  // }
-  // // addIngredientHandler=(type)=>{
-  // //   const tremoveIngredientHandler =(type)=>{
-  //   const typeQuantity= this.state.ingredients[type];
-  //   const updatedIngredients={
-  //     ...this.state.ingredients,
-  //   };
-  //   if(typeQuantity-1>=0){
-  //     updatedIngredients[type]=typeQuantity-1;
-  //   }
-  //   else{
-  //     return;
-  //   }
-  //   const newTotalPrice = this.state.totalPrice-INGREDIENTS_PRICES[type];
-  //   this.setState({
-  //     ingredients:updatedIngredients,
-  //     totalPrice:newTotalPrice,
-  //   });
-  // }
-  // addIngredientHandler=(type)=>{
-  //   const typeQuantity= this.state.ingredients[type];
-  //   const updatedIngredients={
-  //     ...this.state.ingredients,
-  //   };
-  //   updatedIngredients[type]=typeQuantity+1;
-  //   const newTotalPrice = this.state.totalPrice+INGREDIENTS_PRICES[type];
-  //   this.setState({
-  //     ingredients:updatedIngredients,
-  //     totalPrice:newTotalPrice,
-  //   });
-  // }
+
   checkingOut =()=>{
     this.setState({checkingOut:true});
   }
@@ -98,10 +50,7 @@ class BurgerBuilder extends Component {
   continueCheckOutHandler=()=>{
 
       //this.props.history.push('/checkout',{...this.state});
-      this.props.history.push('/checkout',{
-        ingredients:{...this.state.ingredients},
-        totalPrice:this.state.totalPrice
-      });
+      this.props.history.push('/checkout');
 
   }
 
