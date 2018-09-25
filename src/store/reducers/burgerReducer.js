@@ -49,6 +49,7 @@ const reducer =(state=intialState,action)=>{
           Cheese:action.ingredientsObject.Cheese,
           Meat:action.ingredientsObject.Meat,
         },
+        error:false,
       }
     default:
       return state;
