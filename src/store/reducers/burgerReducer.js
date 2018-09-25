@@ -1,4 +1,9 @@
-import {ADD_INGREDIENT,REMOVE_INGREDIENT} from '../actions/actionTypes';
+import {
+  ADD_INGREDIENT,
+  REMOVE_INGREDIENT,
+  INITIAL_INGREDIENT,
+  ERROR_GETTING_INGREDIENT,
+} from '../actions/actionTypes';
 const INGREDIENTS_PRICES ={
   Salad:0.3,
   Bacon:0.7,
@@ -6,18 +11,15 @@ const INGREDIENTS_PRICES ={
   Meat:1.3,
 };
 const intialState ={
-  ingredients:{
-    Salad:0,
-    Bacon:0,
-    Cheese:0,
-    Meat:0,
-  },
+  ingredients:null,
   totalPrice:2,
+  error: false,
 }
 const reducer =(state=intialState,action)=>{
   switch(action.type){
     case ADD_INGREDIENT:
       return {
+        ...state,
         ingredients:{
           ...state.ingredients,
           [action.ingredientType]:state.ingredients[action.ingredientType]+1,
@@ -27,6 +29,7 @@ const reducer =(state=intialState,action)=>{
     case REMOVE_INGREDIENT:
       return state.ingredients[action.ingredientType]?
         {
+          ...state,
           ingredients:{
             ...state.ingredients,
             [action.ingredientType]:state.ingredients[action.ingredientType]-1,
@@ -34,7 +37,21 @@ const reducer =(state=intialState,action)=>{
           totalPrice:state.totalPrice-INGREDIENTS_PRICES[action.ingredientType],
         }
         : state;
-
+    case ERROR_GETTING_INGREDIENT:
+      return {
+        ...state,
+        error:true,
+      }
+    case INITIAL_INGREDIENT:
+      return{
+        ...state,
+        ingredients:{
+          Salad:action.ingredientsObject.Salad,
+          Bacon:action.ingredientsObject.Bacon,
+          Cheese:action.ingredientsObject.Cheese,
+          Meat:action.ingredientsObject.Meat,
+        },
+      }
     default:
       return state;
   }

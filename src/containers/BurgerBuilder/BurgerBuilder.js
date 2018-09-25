@@ -12,7 +12,6 @@ import * as actions from '../../store/actions/actionsIndex';
 class BurgerBuilder extends Component {
   state={
     checkingOut : false,
-    error: false,
   }
   checkingOut =()=>{
     this.setState({checkingOut:true});
@@ -21,10 +20,7 @@ class BurgerBuilder extends Component {
     this.setState({checkingOut:false});
   }
   continueCheckOutHandler=()=>{
-
-      //this.props.history.push('/checkout',{...this.state});
       this.props.history.push('/checkout');
-
   }
 
   render(){
