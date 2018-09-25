@@ -15,32 +15,6 @@ class BurgerBuilder extends Component {
     loading: false,
     error: false,
   }
-  constructor(props){
-    super(props);
-    axios.get('/ingredients.json')
-      .then (response=>{
-        const ingredients=response.data;
-        const orderdIngredients = {
-          Salad:ingredients.Salad,
-          Bacon:ingredients.Bacon,
-          Cheese:ingredients.Cheese,
-          Meat:ingredients.Meat,
-        };
-        this.setState({ingredients:orderdIngredients});
-      }).catch(error =>{
-        this.setState({error:true});
-    });
-  }
-  //can do it like that too
-  // componentDidMount(){
-  //   axios.get('/ingredients.json')
-  //     .then (response=>{
-  //       this.setState({ingredients:response.data});
-  //     }).catch(error =>{
-  //       this.setState({error:true});
-  //   });
-  //  }
-
   checkingOut =()=>{
     this.setState({checkingOut:true});
   }
