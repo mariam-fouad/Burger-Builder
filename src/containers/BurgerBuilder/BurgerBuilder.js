@@ -7,7 +7,7 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 import errorHandler from '../../hoc/errorHandler/errorHandler';
 import axios from '../../order-axios';
 import {connect} from 'react-redux';
-import {ADD_INGREDIENT,REMOVE_INGREDIENT} from '../../store/actions';
+import {ADD_INGREDIENT,REMOVE_INGREDIENT} from '../../store/actions/actionTypes';
 
 class BurgerBuilder extends Component {
   state={

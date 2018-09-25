@@ -1,4 +1,4 @@
-import {ADD_INGREDIENT,REMOVE_INGREDIENT} from '../actions';
+import {ADD_INGREDIENT,REMOVE_INGREDIENT} from '../actions/actionTypes';
 const INGREDIENTS_PRICES ={
   Salad:0.3,
   Bacon:0.7,
