@@ -12,7 +12,6 @@ import * as actions from '../../store/actions/actionsIndex';
 class BurgerBuilder extends Component {
   state={
     checkingOut : false,
-    loading: false,
     error: false,
   }
   checkingOut =()=>{
@@ -55,9 +54,7 @@ class BurgerBuilder extends Component {
         cancel={this.cancelingCheckOutHandler}
         price={this.props.totalPrice}/>;
     }
-    if (this.state.loading){
-      insideModal=<Spinner />;
-    }
+
     return(
       <React.Fragment>
         <Modal show={this.state.checkingOut} clickModal={this.cancelingCheckOutHandler}>
