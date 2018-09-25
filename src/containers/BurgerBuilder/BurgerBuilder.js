@@ -31,7 +31,7 @@ class BurgerBuilder extends Component {
       ingredientsDisableInfo[key]=ingredientsDisableInfo[key]<=0;
     }
     let insideModal = null;
-    let burger = this.state.error ? <p>Ingredients cannot be loaded</p>:<Spinner />;
+    let burger = this.props.error ? <p>Ingredients cannot be loaded</p>:<Spinner />;
     if (this.props.ingredients){
       burger = (
         <React.Fragment>
@@ -66,6 +66,7 @@ const mapStateToProps=state=>{
   return{
     ingredients:state.burgerReducer.ingredients,
     totalPrice:state.burgerReducer.totalPrice,
+    error : state.burgerReducer.error,
   };
 }
 
