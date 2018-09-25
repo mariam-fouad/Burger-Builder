@@ -27,8 +27,7 @@ const reducer =(state=intialState,action)=>{
         totalPrice:state.totalPrice+INGREDIENTS_PRICES[action.ingredientType],
       }
     case REMOVE_INGREDIENT:
-      return state.ingredients[action.ingredientType]?
-        {
+      return{
           ...state,
           ingredients:{
             ...state.ingredients,
@@ -36,7 +35,6 @@ const reducer =(state=intialState,action)=>{
           },
           totalPrice:state.totalPrice-INGREDIENTS_PRICES[action.ingredientType],
         }
-        : state;
     case ERROR_GETTING_INGREDIENT:
       return {
         ...state,
