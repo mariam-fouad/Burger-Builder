@@ -13,6 +13,9 @@ class BurgerBuilder extends Component {
   state={
     checkingOut : false,
   }
+  componentDidMount(){
+    this.props.initialIngredient();
+  }
   checkingOut =()=>{
     this.setState({checkingOut:true});
   }
@@ -74,7 +77,7 @@ const mapDispatchToProps=dispatch=>{
   return {
     addIngredient:(ingredientType)=>dispatch(actions.addIngredient(ingredientType)),
     removeIngredient:(ingredientType)=>dispatch(actions.removeIngredient(ingredientType)),
-
+    initialIngredient: ()=> dispatch (actions.initialIngredient()),
   }
 }
 
