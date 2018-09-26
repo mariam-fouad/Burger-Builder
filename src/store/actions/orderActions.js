@@ -1,5 +1,5 @@
 import {ORDERING_BURGER_SUCCESS,ORDERING_BURGER_FAILED} from './actionTypes';
-import axios from '../../../order-axios';
+import axios from '../../order-axios';
 const orderingBurgerSuccees = (id , orderData)=>{
   return {
     type:ORDERING_BURGER_SUCCESS,
