@@ -34,6 +34,7 @@ class ContactData extends Component{
             value:'',
             validation:{
               required:true,
+              isEmail: true
             },
             valid:false,
             touched:false,
@@ -48,9 +49,11 @@ class ContactData extends Component{
             value:'',
             validation:{
               required:true,
+              isNumeric: true,
             },
             valid:false,
             touched:false,
+
           },
           street :{
             elementType:'text',
@@ -78,6 +81,7 @@ class ContactData extends Component{
               required:true,
               minLength:4,
               maxLength:5,
+              isNumeric: true,
             },
             valid:false,
             touched:false,
@@ -93,6 +97,7 @@ class ContactData extends Component{
             value:'',
             validation:{
               required:true,
+              isNumeric: true,
             },
             valid:false,
             touched:false,
@@ -108,6 +113,7 @@ class ContactData extends Component{
             value:'',
             validation:{
               required:true,
+              isNumeric: true,
             },
             valid:false,
             touched:false,
@@ -124,7 +130,6 @@ class ContactData extends Component{
             value:'fastest',
             validation:{},
             valid:true,
-            touched:true,
           },
     },
     isFormValid:false,
@@ -136,7 +141,7 @@ class ContactData extends Component{
       return true;
     }
     if(rules.required){
-      isValid= trimedValue.trim()!=='' &&isValid;
+      isValid= trimedValue!=='' &&isValid;
     }
     if(rules.minLength){
       isValid= trimedValue.length >= rules.minLength &&isValid;
@@ -144,18 +149,20 @@ class ContactData extends Component{
     if(rules.maxLength){
       isValid= trimedValue.length <= rules.maxLength &&isValid;
     }
+    if (rules.isEmail) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      isValid = pattern.test(value) && isValid;
+    }
+    if (rules.isNumeric) {
+      const pattern = /^\d+$/;
+      isValid = pattern.test(value) && isValid;
+    }
 
     return isValid;
   }
-  validateForm =()=>{
-    let isFormValid =true;
-    for (let input in this.state.orderInfo){
-      isFormValid = this.state.orderInfo[input].valid && isFormValid;
-    }
-    return isFormValid;
-  }
   orderButtonHandler=(event)=>{
     event.preventDefault();
+    console.log('clicked');
     const orderDetails={};
     for (let input in this.state.orderInfo){
       orderDetails[input]=this.state.orderInfo[input].value;
@@ -179,10 +186,12 @@ class ContactData extends Component{
     updatedOrderElement.touched=true;
     updatedOrderElement.valid=this.validateInput(updatedOrderElement.value,updatedOrderElement.validation);
     orderUpdated[orderKey]=updatedOrderElement;
-    const isFormValid = this.validateForm();
-    console.log(isFormValid);
-    console.log(updatedOrderElement.valid);
+    let isFormValid = true;
+    for (let input in orderUpdated){
+      isFormValid = orderUpdated[input].valid && isFormValid;
+    }
     this.setState({orderInfo:orderUpdated,isFormValid:isFormValid});
+
   }
   render (){
     const formArray= [];
@@ -202,7 +211,7 @@ class ContactData extends Component{
     let content = (
       <React.Fragment>
         <h4>Enter your Contact Data</h4>
-        <form onSubmit={this.orderHandler}>
+        <form onSubmit={this.orderButtonHandler}>
           {formArray}
           <Button disabled={!this.state.isFormValid}>ORDER</Button>
         </form>
@@ -228,9 +237,9 @@ const mapStateToProps=state=>{
   };
 };
 
-const mapDispatchToState=dispatch=>{
+const mapDispatchToProps=dispatch=>{
   return {
     onOrdering:(orderInfo)=>dispatch(actions.orderingBurger(orderInfo)),
-  }
+  };
 }
-export default  errorHandler(connect(mapStateToProps,mapDispatchToState)(ContactData),axios);
+export default  errorHandler(connect(mapStateToProps,mapDispatchToProps)(ContactData),axios);

@@ -25,6 +25,7 @@ const orderingBurrgerLoading = ()=>{
 }
 export const orderingBurger = (orderInfo)=>{
   return dispatch=>{
+    console.log('entered');
     dispatch(orderingBurrgerLoading);
     axios.post('/orders.json',orderInfo)
       .then (response =>{
