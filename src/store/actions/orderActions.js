@@ -1,7 +1,8 @@
 import {
   ORDERING_BURGER_SUCCESS,
   ORDERING_BURGER_FAILED,
-  ORDERING_BURGER_LOADING,} from './actionTypes';
+  ORDERING_BURGER_LOADING,
+  INITIAL_ORDERED,} from './actionTypes';
 import axios from '../../order-axios';
 const orderingBurgerSuccees = (id , orderData)=>{
   return {
@@ -25,8 +26,7 @@ const orderingBurrgerLoading = ()=>{
 }
 export const orderingBurger = (orderInfo)=>{
   return dispatch=>{
-    console.log('entered');
-    dispatch(orderingBurrgerLoading);
+    dispatch(orderingBurrgerLoading());
     axios.post('/orders.json',orderInfo)
       .then (response =>{
         dispatch(orderingBurgerSuccees(response.data.name,orderInfo));
@@ -36,4 +36,10 @@ export const orderingBurger = (orderInfo)=>{
         dispatch(orderingBurgerFailed(error));
       });
   }
-}
+};
+
+export const intialOrdered =()=>{
+  return {
+    type:INITIAL_ORDERED,
+  };
+};

@@ -1,11 +1,13 @@
 import {
   ORDERING_BURGER_SUCCESS,
   ORDERING_BURGER_FAILED,
-  ORDERING_BURGER_LOADING} from '../actions/actionTypes';
+  ORDERING_BURGER_LOADING,
+  INITIAL_ORDERED,} from '../actions/actionTypes';
 
 const intialState={
   orders:[],
   loading:false,
+  ordered: false,
 }
 
 const reducer = (state=intialState,action)=>{
@@ -19,6 +21,7 @@ const reducer = (state=intialState,action)=>{
           ...state,
           orders: state.orders.concat(newOrder),
           loading:false,
+          ordered:true,
         };
       case ORDERING_BURGER_FAILED:
         return {
@@ -29,6 +32,11 @@ const reducer = (state=intialState,action)=>{
         return{
           ...state,
           loading:true,
+        }
+      case INITIAL_ORDERED:
+        return{
+          ...state,
+          ordered:false,
         }
       default:
         return state;

@@ -23,7 +23,8 @@ class BurgerBuilder extends Component {
     this.setState({checkingOut:false});
   }
   continueCheckOutHandler=()=>{
-      this.props.history.push('/checkout');
+    this.props.intialOrdered();
+    this.props.history.push('/checkout');
   }
 
   render(){
@@ -78,6 +79,7 @@ const mapDispatchToProps=dispatch=>{
     addIngredient:(ingredientType)=>dispatch(actions.addIngredient(ingredientType)),
     removeIngredient:(ingredientType)=>dispatch(actions.removeIngredient(ingredientType)),
     initialIngredient: ()=> dispatch (actions.initialIngredient()),
+    intialOrdered: ()=> dispatch (actions.intialOrdered()),
   }
 }
 

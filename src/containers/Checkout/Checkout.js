@@ -16,8 +16,10 @@ class Checkout extends Component{
   render(){
     let summary = <Redirect to='/'/>;
     if (this.props.ingredients){
+      const ordered = this.props.ordered?  <Redirect to='/'/>: null;
       summary=(
         <div>
+          {ordered}
           <CheckoutSummary
             price= {this.props.price}
             ingredients={this.props.ingredients}
@@ -36,6 +38,7 @@ const mapStateToProps=state=>{
   return{
     ingredients:state.burgerReducer.ingredients,
     price:state.burgerReducer.totalPrice.toFixed(2),
+    ordered:state.orderReducer.ordered,
   };
 }
 export default connect(mapStateToProps)(Checkout);

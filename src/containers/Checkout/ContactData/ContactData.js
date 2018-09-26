@@ -162,7 +162,6 @@ class ContactData extends Component{
   }
   orderButtonHandler=(event)=>{
     event.preventDefault();
-    console.log('clicked');
     const orderDetails={};
     for (let input in this.state.orderInfo){
       orderDetails[input]=this.state.orderInfo[input].value;
