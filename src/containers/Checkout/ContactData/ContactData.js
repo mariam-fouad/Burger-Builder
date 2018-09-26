@@ -165,15 +165,7 @@ class ContactData extends Component{
       orderData:orderDetails,
 
     };
-    axios.post('/orders.json',orderInfo)
-      .then (response =>{
-        this.setState({loading:false});
-        this.props.history.push('/');
 
-      })
-      .catch (error =>{
-        this.setState({loading:false});
-      });
   }
   inputChangedHandler=(event,orderKey)=>{
     const orderUpdated={
