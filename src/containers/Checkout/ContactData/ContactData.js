@@ -6,6 +6,7 @@ import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 import {connect} from 'react-redux';
 import errorHandler from '../../../hoc/errorHandler/errorHandler';
+import * as actions from '../../../store/actions/actionsIndex';
 class ContactData extends Component{
   state={
     orderInfo:{
@@ -125,7 +126,6 @@ class ContactData extends Component{
             valid:true,
           },
     },
-    loading:false,
     isFormValid:false,
   }
   validateInput =(value,rules)=>{
@@ -155,7 +155,6 @@ class ContactData extends Component{
   }
   orderButtonHandler=(event)=>{
     event.preventDefault();
-    this.setState({loading:true});
     const orderDetails={};
     for (let input in this.state.orderInfo){
       orderDetails[input]=this.state.orderInfo[input].value;
@@ -166,6 +165,7 @@ class ContactData extends Component{
       orderData:orderDetails,
 
     };
+    this.props.onOrdering(orderInfo);
 
   }
   inputChangedHandler=(event,orderKey)=>{
@@ -218,10 +218,17 @@ class ContactData extends Component{
   }
 }
 
+
 const mapStateToProps=state=>{
   return{
     ingredients:state.burgerReducer.ingredients,
     price:state.burgerReducer.totalPrice,
   };
+};
+
+const mapDispatchToState=dispatch=>{
+  return {
+    onOrdering:(orderInfo)=>dispatch(actions.orderingBurger(orderInfo)),
+  }
 }
-export default  errorHandler(connect(mapStateToProps)(ContactData),axios);
+export default  errorHandler(connect(mapStateToProps,mapDispatchToState)(ContactData),axios);
