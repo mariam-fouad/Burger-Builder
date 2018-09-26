@@ -1,4 +1,7 @@
-import {ORDERING_BURGER_SUCCESS,ORDERING_BURGER_FAILED} from '../actions/actionTypes';
+import {
+  ORDERING_BURGER_SUCCESS,
+  ORDERING_BURGER_FAILED,
+  ORDERING_BURGER_LOADING} from '../actions/actionTypes';
 
 const intialState={
   orders:[],
@@ -22,6 +25,11 @@ const reducer = (state=intialState,action)=>{
           ...state,
           loading:false,
         };
+      case ORDERING_BURGER_LOADING:
+        return{
+          ...state,
+          loading:true,
+        }
       default:
         return state;
     }

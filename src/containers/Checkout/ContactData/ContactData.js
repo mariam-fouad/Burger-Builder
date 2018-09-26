@@ -163,7 +163,6 @@ class ContactData extends Component{
       ingredients: this.props.ingredients,
       price : this.props.price,
       orderData:orderDetails,
-
     };
     this.props.onOrdering(orderInfo);
 
@@ -207,7 +206,7 @@ class ContactData extends Component{
         </form>
       </React.Fragment>
     );
-    if (this.state.loading){
+    if (this.props.loading){
       content=(<Spinner/>);
     }
     return (
@@ -223,6 +222,7 @@ const mapStateToProps=state=>{
   return{
     ingredients:state.burgerReducer.ingredients,
     price:state.burgerReducer.totalPrice,
+    loading: state.orderReducer.loading,
   };
 };
 

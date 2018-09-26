@@ -1,4 +1,7 @@
-import {ORDERING_BURGER_SUCCESS,ORDERING_BURGER_FAILED} from './actionTypes';
+import {
+  ORDERING_BURGER_SUCCESS,
+  ORDERING_BURGER_FAILED,
+  ORDERING_BURGER_LOADING,} from './actionTypes';
 import axios from '../../order-axios';
 const orderingBurgerSuccees = (id , orderData)=>{
   return {
@@ -15,8 +18,14 @@ const orderingBurgerFailed = (error)=>{
   }
 }
 
+const orderingBurrgerLoading = ()=>{
+  return {
+    type:ORDERING_BURGER_LOADING,
+  }
+}
 export const orderingBurger = (orderInfo)=>{
   return dispatch=>{
+    dispatch(orderingBurrgerLoading);
     axios.post('/orders.json',orderInfo)
       .then (response =>{
         dispatch(orderingBurgerSuccees(response.data,orderInfo));
