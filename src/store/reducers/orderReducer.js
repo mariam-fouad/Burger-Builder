@@ -2,7 +2,10 @@ import {
   ORDERING_BURGER_SUCCESS,
   ORDERING_BURGER_FAILED,
   ORDERING_BURGER_LOADING,
-  INITIAL_ORDERED,} from '../actions/actionTypes';
+  INITIAL_ORDERED,
+  FETCHING_ORDERS_LOADING,
+  FETCHING_ORDERS_SUCCESS,
+  FETCHING_ORDERS_FAILED,} from '../actions/actionTypes';
 
 const intialState={
   orders:[],
@@ -37,6 +40,22 @@ const reducer = (state=intialState,action)=>{
         return{
           ...state,
           ordered:false,
+        }
+      case FETCHING_ORDERS_LOADING:
+        return {
+          ...state,
+          loading:true,
+        };
+      case FETCHING_ORDERS_SUCCESS:
+        return{
+          ...state,
+          orders:action.orders,
+          loading:false,
+        };
+      case FETCHING_ORDERS_FAILED:
+        return{
+          ...state,
+          loading:false,
         }
       default:
         return state;
