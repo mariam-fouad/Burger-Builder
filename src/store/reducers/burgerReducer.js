@@ -4,6 +4,7 @@ import {
   INITIAL_INGREDIENT,
   ERROR_GETTING_INGREDIENT,
 } from '../actions/actionTypes';
+import {updateObject} from '../utility'
 const INGREDIENTS_PRICES ={
   Salad:0.4,
   Bacon:0.8,
@@ -15,45 +16,44 @@ const intialState ={
   totalPrice:3.8,
   error: false,
 }
+
+const addIngredient = (state,action)=>{
+  const updateIngredientsObject =updateObject(state.ingredients, {[action.ingredientType]:state.ingredients[action.ingredientType]+1});
+  return updateObject (state, {
+    ingredients:updateIngredientsObject,
+    totalPrice:state.totalPrice+INGREDIENTS_PRICES[action.ingredientType],
+  });
+}
+
+const removeIngredient = (state,action)=>{
+  const updateIngredientsObject =updateObject(state.ingredients, {[action.ingredientType]:state.ingredients[action.ingredientType]-1});
+  return updateObject (state, {
+    ingredients:updateIngredientsObject,
+    totalPrice:state.totalPrice-INGREDIENTS_PRICES[action.ingredientType],
+  });
+}
+const errorGettingIngredient = (state,action)=>{
+  return updateObject (state,{error:true});
+}
+const initialIngredient = (state,action)=>{
+  return updateObject (state,{
+    ingredients:{
+    Salad:action.ingredientsObject.Salad,
+    Bacon:action.ingredientsObject.Bacon,
+    Cheese:action.ingredientsObject.Cheese,
+    Meat:action.ingredientsObject.Meat,
+  },
+  error:false,
+  totalPrice:3.8,
+});
+}
 const reducer =(state=intialState,action)=>{
   switch(action.type){
-    case ADD_INGREDIENT:
-      return {
-        ...state,
-        ingredients:{
-          ...state.ingredients,
-          [action.ingredientType]:state.ingredients[action.ingredientType]+1,
-        },
-        totalPrice:state.totalPrice+INGREDIENTS_PRICES[action.ingredientType],
-      }
-    case REMOVE_INGREDIENT:
-      return{
-          ...state,
-          ingredients:{
-            ...state.ingredients,
-            [action.ingredientType]:state.ingredients[action.ingredientType]-1,
-          },
-          totalPrice:state.totalPrice-INGREDIENTS_PRICES[action.ingredientType],
-        }
-    case ERROR_GETTING_INGREDIENT:
-      return {
-        ...state,
-        error:true,
-      }
-    case INITIAL_INGREDIENT:
-      return{
-        ...state,
-        ingredients:{
-          Salad:action.ingredientsObject.Salad,
-          Bacon:action.ingredientsObject.Bacon,
-          Cheese:action.ingredientsObject.Cheese,
-          Meat:action.ingredientsObject.Meat,
-        },
-        error:false,
-        totalPrice:3.8,
-      }
-    default:
-      return state;
+    case ADD_INGREDIENT:return addIngredient (state,action);
+    case REMOVE_INGREDIENT:return removeIngredient (state,action);
+    case ERROR_GETTING_INGREDIENT:return errorGettingIngredient (state,action);
+    case INITIAL_INGREDIENT:return initialIngredient (state,action);
+    default:return state;
   }
 
 }
