@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Order from '../../components/Order/Order';
 import axios from '../../order-axios';
 import errorHandler from '../../hoc/errorHandler/errorHandler';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/actionsIndex';
 class Orders extends Component{
@@ -9,16 +10,16 @@ class Orders extends Component{
     this.props.startFetchingOrders();
   }
   render(){
-    return(
-      <React.Fragment>
-        {this.props.orders.map(order=>(
-          <Order
-          key={order.id}
-          ingredients={order.ingredients}
-          price={+order.price}/>
-        ))}
-      </React.Fragment>
-    )
+    let orders = <Spinner />
+    if (!this.props.loading){
+      orders=this.props.orders.map(order=>
+        (<Order
+        key={order.id}
+        ingredients={order.ingredients}
+        price={+order.price}/>)
+    );
+    }
+    return orders;
   }
 }
 
