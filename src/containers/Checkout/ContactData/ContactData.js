@@ -5,6 +5,7 @@ import axios from '../../../order-axios';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 import {connect} from 'react-redux';
+import errorHandler from '../../../hoc/errorHandler/errorHandler';
 class ContactData extends Component{
   state={
     orderInfo:{
@@ -223,4 +224,4 @@ const mapStateToProps=state=>{
     price:state.burgerReducer.totalPrice,
   };
 }
-export default connect(mapStateToProps)(ContactData);
+export default  errorHandler(connect(mapStateToProps)(ContactData),axios);
