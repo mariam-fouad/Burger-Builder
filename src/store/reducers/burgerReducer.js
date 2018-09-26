@@ -5,14 +5,14 @@ import {
   ERROR_GETTING_INGREDIENT,
 } from '../actions/actionTypes';
 const INGREDIENTS_PRICES ={
-  Salad:0.3,
-  Bacon:0.7,
+  Salad:0.4,
+  Bacon:0.8,
   Cheese:0.4,
-  Meat:1.3,
+  Meat:1.4,
 };
 const intialState ={
   ingredients:null,
-  totalPrice:2,
+  totalPrice:3.8,
   error: false,
 }
 const reducer =(state=intialState,action)=>{
