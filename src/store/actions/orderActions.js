@@ -28,7 +28,7 @@ export const orderingBurger = (orderInfo)=>{
     dispatch(orderingBurrgerLoading);
     axios.post('/orders.json',orderInfo)
       .then (response =>{
-        dispatch(orderingBurgerSuccees(response.data,orderInfo));
+        dispatch(orderingBurgerSuccees(response.data.name,orderInfo));
 
       })
       .catch (error =>{

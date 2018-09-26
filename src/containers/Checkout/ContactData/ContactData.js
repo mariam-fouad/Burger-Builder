@@ -124,6 +124,7 @@ class ContactData extends Component{
             value:'fastest',
             validation:{},
             valid:true,
+            touched:true,
           },
     },
     isFormValid:false,
@@ -179,7 +180,8 @@ class ContactData extends Component{
     updatedOrderElement.valid=this.validateInput(updatedOrderElement.value,updatedOrderElement.validation);
     orderUpdated[orderKey]=updatedOrderElement;
     const isFormValid = this.validateForm();
-
+    console.log(isFormValid);
+    console.log(updatedOrderElement.valid);
     this.setState({orderInfo:orderUpdated,isFormValid:isFormValid});
   }
   render (){
