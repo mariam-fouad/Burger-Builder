@@ -80,8 +80,8 @@ class Auth extends Component {
       }
     };
     let isFormValid = true;
-    for (let input in this.state.controls){
-      isFormValid = this.state.controls[input].valid && isFormValid;
+    for (let input in updatedControls){
+      isFormValid = updatedControls[input].valid && isFormValid;
     }
     this.setState({controls:updatedControls, isValid:isFormValid});
   }
@@ -111,28 +111,33 @@ class Auth extends Component {
           changed={(event)=>this.inputChangedHandler(event,input)}
           /> );
     }
-    return (
-      <div className={classes.Auth}>
-      <h4>{this.state.isSignUp?
-        'Sign up to our delisauce burger': 'Sign in to enjoy again'}</h4>
-      <form onSubmit={this.startAuthentication}>
-        {formArray}
-        <Button disabled={!this.state.isValid}>
-          {this.state.isSignUp?'Sign up' : 'Sign in'}
-        </Button>
-      </form>
-      <Button click={this.switchAuthModeHandler} backbackgroundColor="white">
-      {this.state.isSignUp?'Have an account?' : "Don't have an account?"}
-      </Button>
-      </div>
+    let form = <Spinner />;
+    if (!this.props.loading){
+      form=(
+        <div className={classes.Auth}>
+          <h4>{this.state.isSignUp?
+            'Sign up to our delisauce burger': 'Sign in to enjoy again'}</h4>
+          {this.props.error? <h3>Error message : {this.props.error}</h3>: null}
+          <form onSubmit={this.startAuthentication}>
+            {formArray}
+            <Button disabled={!this.state.isValid}>
+              {this.state.isSignUp?'Sign up' : 'Sign in'}
+            </Button>
+          </form>
+          <Button click={this.switchAuthModeHandler} backbackgroundColor="white">
+          {this.state.isSignUp?'Have an account?' : "Don't have an account?"}
+          </Button>
+        </div>
     );
+    }
+    return form;
   }
 }
 
 const mapStateToProps=state=>{
   return{
     loading: state.authReducer.loading,
-    error: state.authReducer.errorMsg,
+    error: state.authReducer.error,
   };
 }
 const mapDispatchToProps=dispatch=>{
