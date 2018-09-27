@@ -98,9 +98,7 @@ class Auth extends Component {
         </form>
       </React.Fragment>
     );
-    if (this.props.loading){
-      content=(<Spinner/>);
-    }
+
     return (
       <div className={classes.ContactData}>
         {content}
