@@ -2,6 +2,7 @@ import {
   AUTH_LOADING,
   AUTH_SUCCESS,
   AUTH_FAILED,
+  AUTH_SIGNOUT,
 } from './actionTypes';
 import axios from 'axios';
 
@@ -25,6 +26,20 @@ const authFailed = (error)=>{
     errorMsg:error,
   }
 }
+
+const authSignout= ()=>{
+  return {
+    type:AUTH_SIGNOUT
+  }
+}
+const signoutTimeout = (timeout)=>{
+  return dispatch=>{
+    (setTimeout(function () {
+      dispatch(authSignout());
+    }, timeout););
+  }
+}
+
 export const authStart= (email,password,isSignUp)=>{
   return dispatch=>{
     dispatch(authLoading());
