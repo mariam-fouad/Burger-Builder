@@ -4,7 +4,8 @@ const button =(props)=>
  (<button
    onClick={props.click}
    className={classes.Button}
-   disabled={props.disabled}>
+   disabled={props.disabled}
+   style={{backgroundColor:props.backbackgroundColor}}>
    {props.children}
    </button>)
 

@@ -109,9 +109,11 @@ class Auth extends Component {
         'Sign up to our delisauce burger': 'Sign in to enjoy again'}</h4>
       <form onSubmit={this.startAuthentication}>
         {formArray}
-        <Button>Sign up</Button>
+        <Button>{this.state.isSignUp?'Sign up' : 'Sign in'}</Button>
       </form>
-      <Button click={this.switchAuthModeHandler}>switch to {this.state.isSignUp?'Sign in' : 'Sign up'}</Button>
+      <Button click={this.switchAuthModeHandler} backbackgroundColor="white">
+      {this.state.isSignUp?'Have an account?' : "Don't have an account?"}
+      </Button>
       </div>
     );
   }
