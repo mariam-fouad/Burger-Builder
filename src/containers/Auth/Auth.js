@@ -2,6 +2,7 @@ import React , {Component} from 'react';
 import classes from './Auth.css';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import {connect} from 'react-redux';
 import * as actionTypes from '../../store/actions/actionsIndex';
 class Auth extends Component {
@@ -129,8 +130,10 @@ class Auth extends Component {
 }
 
 const mapStateToProps=state=>{
-  loading: state.authReducer.loading,
-  error: state.authReducer.errorMsg,
+  return{
+    loading: state.authReducer.loading,
+    error: state.authReducer.errorMsg,
+  };
 }
 const mapDispatchToProps=dispatch=>{
   return {
