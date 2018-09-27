@@ -91,19 +91,13 @@ class Auth extends Component {
           changed={(event)=>this.inputChangedHandler(event,input)}
           /> );
     }
-    let content = (
-      <React.Fragment>
-        <h4>sign up for our delisauce burger</h4>
-        <form>
-          {formArray}
-          <Button>Sign up</Button>
-        </form>
-      </React.Fragment>
-    );
-
     return (
       <div className={classes.Auth}>
-        {content}
+      <h4>sign up for our delisauce burger</h4>
+      <form>
+        {formArray}
+        <Button>Sign up</Button>
+      </form>
       </div>
     );
   }
