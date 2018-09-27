@@ -36,7 +36,7 @@ const signoutTimeout = (timeout)=>{
   return dispatch=>{
     (setTimeout(function () {
       dispatch(authSignout());
-    }, timeout));
+    }, timeout*1000));
   }
 }
 
