@@ -9,8 +9,8 @@ const navigationItems = ()=>(
     <NavigationItem link="/orders" >
       Orders
     </NavigationItem>
-    <NavigationItem link="/authenticate" >
-      Authentication
+    <NavigationItem link="/authentication" >
+      Authenticate
     </NavigationItem>
   </ul>
 )
