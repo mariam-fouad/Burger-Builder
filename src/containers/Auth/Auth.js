@@ -2,6 +2,8 @@ import React , {Component} from 'react';
 import classes from './Auth.css';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
+import {connect} from 'react-redux';
+import * as actionTypes from '../../store/actions/actionsIndex';
 class Auth extends Component {
   state={
     controls:{
@@ -102,4 +104,10 @@ class Auth extends Component {
     );
   }
 }
-export default Auth;
+
+const mapDispatchToProps=dispatch=>{
+  return {
+    onAuthStart : (email,password)=> dispatch (actionTypes.authStart),
+  }
+}
+export default connect(null,mapDispatchToProps)(Auth);
