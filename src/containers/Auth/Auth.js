@@ -86,7 +86,9 @@ class Auth extends Component {
   }
   startAuthentication = (event)=>{
     event.preventDefault();
-    this.props.onAuthStart(this.state.controls.email.value,this.state.controls.password.value);
+    this.props.onAuthStart(this.state.controls.email.value,
+      this.state.controls.password.value,
+      this.state.isSignUp);
   }
   switchAuthModeHandler= ()=>{
     this.setState(prevState=>{
@@ -128,7 +130,7 @@ class Auth extends Component {
 
 const mapDispatchToProps=dispatch=>{
   return {
-    onAuthStart : (email,password)=> dispatch (actionTypes.authStart(email,password)),
+    onAuthStart : (email,password,isSignUp)=> dispatch (actionTypes.authStart(email,password,isSignUp)),
   }
 }
 export default connect(null,mapDispatchToProps)(Auth);
