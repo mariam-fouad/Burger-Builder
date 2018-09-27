@@ -171,7 +171,7 @@ class ContactData extends Component{
       price : this.props.price,
       orderData:orderDetails,
     };
-    this.props.onOrdering(orderInfo);
+    this.props.onOrdering(orderInfo,this.props.token);
 
   }
   inputChangedHandler=(event,orderKey)=>{
@@ -233,12 +233,13 @@ const mapStateToProps=state=>{
     ingredients:state.burgerReducer.ingredients,
     price:state.burgerReducer.totalPrice,
     loading: state.orderReducer.loading,
+    token: state.authReducer.token,
   };
 };
 
 const mapDispatchToProps=dispatch=>{
   return {
-    onOrdering:(orderInfo)=>dispatch(actions.orderingBurger(orderInfo)),
+    onOrdering:(orderInfo,token)=>dispatch(actions.orderingBurger(orderInfo,token)),
   };
 }
 export default  errorHandler(connect(mapStateToProps,mapDispatchToProps)(ContactData),axios);

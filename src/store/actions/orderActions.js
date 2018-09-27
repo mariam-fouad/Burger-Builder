@@ -27,10 +27,10 @@ const orderingBurrgerLoading = ()=>{
     type:ORDERING_BURGER_LOADING,
   }
 }
-export const orderingBurger = (orderInfo)=>{
+export const orderingBurger = (orderInfo,token)=>{
   return dispatch=>{
     dispatch(orderingBurrgerLoading());
-    axios.post('/orders.json',orderInfo)
+    axios.post('/orders.json?auth='+token,orderInfo)
       .then (response =>{
         dispatch(orderingBurgerSuccees(response.data.name,orderInfo));
 
@@ -60,9 +60,9 @@ const fetchingOrdersSuccess=(orders)=>{
   };
 }
 export const fetchingOrders = ()=>{
-  return dispatch=>{
+  return (dispatch,getState)=>{
     dispatch(fetchingOrdersLoading());
-    axios.get('/orders.json')
+    axios.get('/orders.json?auth='+getState().authReducer.token)
       .then(response=>{
         const fetchedOrders=[];
         for (let key in response.data){
