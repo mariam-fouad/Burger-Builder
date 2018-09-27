@@ -22,7 +22,7 @@ const authSuccess= (token,userId)=>{
 const authFailed = (error)=>{
   return {
     type:AUTH_FAILED,
-    error:error,
+    errorMsg:error,
   }
 }
 export const authStart= (email,password,isSignUp)=>{
