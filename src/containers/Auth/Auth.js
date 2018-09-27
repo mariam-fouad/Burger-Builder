@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import classes from './Auth.cs';
+import classes from './Auth.css';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 class Auth extends Component {
