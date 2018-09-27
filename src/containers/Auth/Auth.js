@@ -39,6 +39,7 @@ class Auth extends Component {
       },
     },
     isSignUp:true,
+    isValid:false,
   }
   validateInput =(value,rules)=>{
     let isValid = true;
@@ -77,7 +78,11 @@ class Auth extends Component {
         value:event.target.value,
       }
     };
-    this.setState({controls:updatedControls});
+    let isFormValid = true;
+    for (let input in this.state.controls){
+      isFormValid = this.state.controls[input].valid && isFormValid;
+    }
+    this.setState({controls:updatedControls, isValid:isFormValid});
   }
   startAuthentication = (event)=>{
     event.preventDefault();
@@ -109,7 +114,9 @@ class Auth extends Component {
         'Sign up to our delisauce burger': 'Sign in to enjoy again'}</h4>
       <form onSubmit={this.startAuthentication}>
         {formArray}
-        <Button>{this.state.isSignUp?'Sign up' : 'Sign in'}</Button>
+        <Button disabled={!this.state.isValid}>
+          {this.state.isSignUp?'Sign up' : 'Sign in'}
+        </Button>
       </form>
       <Button click={this.switchAuthModeHandler} backbackgroundColor="white">
       {this.state.isSignUp?'Have an account?' : "Don't have an account?"}
