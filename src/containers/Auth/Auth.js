@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-
+import classes from './Auth.cs';
 class Auth extends Component {
   state={
     controls:{
