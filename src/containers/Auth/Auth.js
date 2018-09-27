@@ -72,7 +72,7 @@ class Auth extends Component {
         value:event.target.value,
       }
     };
-    setState({controls:updatedControls});
+    this.setState({controls:updatedControls});
   }
   render (){
     const formArray= [];
