@@ -19,7 +19,7 @@ const authSuccess =(state,action)=>{
   return updateObject(state,{
     loading:false,
     error:null,
-    token:actoin.token,
+    token:action.token,
     userId:action.userId,});
 };
 
@@ -29,7 +29,7 @@ const authFailed = (state,action)=>{
     error:action.errorMsg,
   });
 }
-const reducer = (state=initialState,action){
+const reducer = (state=initialState,action)=>{
   switch (action.type) {
     case AUTH_LOADING : return authLoading (state,action);
     case AUTH_SUCCESS : return authSuccess(state,action);
