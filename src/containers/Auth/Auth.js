@@ -92,7 +92,7 @@ class Auth extends Component {
     let content = (
       <React.Fragment>
         <h4>sign up for our delisauce burger</h4>
-        <form onSubmit={}>
+        <form>
           {formArray}
           <Button>Sign up</Button>
         </form>
