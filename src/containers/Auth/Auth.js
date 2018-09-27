@@ -80,8 +80,6 @@ class Auth extends Component {
   }
   startAuthentication = (event)=>{
     event.preventDefault();
-    console.log(this.state.controls.email.value);
-    console.log(this.state.controls.password.value);
     this.props.onAuthStart(this.state.controls.email.value,this.state.controls.password.value);
   }
   render (){
