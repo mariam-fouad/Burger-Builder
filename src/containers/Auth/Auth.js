@@ -1,6 +1,6 @@
 import React , {Component} from 'react';
 
-class Auth from Component {
+class Auth extends Component {
   state={
     controls:{
       email:{
