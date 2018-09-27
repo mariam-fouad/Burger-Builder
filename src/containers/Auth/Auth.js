@@ -100,7 +100,7 @@ class Auth extends Component {
     );
 
     return (
-      <div className={classes.ContactData}>
+      <div className={classes.Auth}>
         {content}
       </div>
     );
