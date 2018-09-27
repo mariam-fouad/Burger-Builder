@@ -78,6 +78,12 @@ class Auth extends Component {
     };
     this.setState({controls:updatedControls});
   }
+  startAuthentication = (event)=>{
+    event.preventDefault();
+    console.log(this.state.controls.email.value);
+    console.log(this.state.controls.password.value);
+    this.props.onAuthStart(this.state.controls.email.value,this.state.controls.password.value);
+  }
   render (){
     const formArray= [];
     for (let input in this.state.controls){
@@ -96,7 +102,7 @@ class Auth extends Component {
     return (
       <div className={classes.Auth}>
       <h4>sign up for our delisauce burger</h4>
-      <form>
+      <form onSubmit={this.startAuthentication}>
         {formArray}
         <Button>Sign up</Button>
       </form>
@@ -107,7 +113,7 @@ class Auth extends Component {
 
 const mapDispatchToProps=dispatch=>{
   return {
-    onAuthStart : (email,password)=> dispatch (actionTypes.authStart),
+    onAuthStart : (email,password)=> dispatch (actionTypes.authStart(email,password)),
   }
 }
 export default connect(null,mapDispatchToProps)(Auth);
