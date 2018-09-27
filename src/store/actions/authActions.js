@@ -31,7 +31,6 @@ export const authStart= (email,password)=>{
       password:password,
       returnSecureToken:true,
     }
-    console.log(authObject);
     axios.post('https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyAHKdQmU1l-OX0c-xPEC3Bjh8p_gFM3V44',authObject)
       .then(response=>{
         console.log(response);
@@ -39,7 +38,7 @@ export const authStart= (email,password)=>{
       })
       .catch(error=>{
         console.log(error);
-        dispatch(authFailed(error));
+        dispatch(authFailed(error.response.data.error.message));
       })
   }
 }
