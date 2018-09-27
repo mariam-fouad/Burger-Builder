@@ -3,6 +3,7 @@ import { Switch , Route} from 'react-router-dom'
 import './App.css';
 import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
+import Auth from './containers/Auth/Auth';
 import Orders from './containers/Orders/Orders';
 import Radium ,{StyleRoot}from 'radium';
 import Checkout from './containers/Checkout/Checkout'
@@ -15,6 +16,7 @@ class App extends Component {
               <Switch>
                 <Route  path="/checkout" component={Checkout}/>
                 <Route  path="/orders" component={Orders}/>
+                <Route  path="/authentication" component={Auth}/>
                 <Route exact path="/" component={BurgerBuilder}/>
               </Switch>
             </Layout>
