@@ -128,9 +128,13 @@ class Auth extends Component {
   }
 }
 
+const mapStateToProps=state=>{
+  loading: state.authReducer.loading,
+  error: state.authReducer.errorMsg,
+}
 const mapDispatchToProps=dispatch=>{
   return {
     onAuthStart : (email,password,isSignUp)=> dispatch (actionTypes.authStart(email,password,isSignUp)),
   }
 }
-export default connect(null,mapDispatchToProps)(Auth);
+export default connect(mapStateToProps,mapDispatchToProps)(Auth);
