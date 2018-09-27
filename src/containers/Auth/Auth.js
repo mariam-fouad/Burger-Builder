@@ -22,7 +22,7 @@ class Auth extends Component {
       },
       password:{
         elementType:'text',
-        label:'E-Mail',
+        label:'password',
         elementConfig:{
           type:'password',
           placeholder:'password'
