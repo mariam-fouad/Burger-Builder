@@ -26,7 +26,7 @@ const authFailed = (error)=>{
 export const authStart= (email,password)=>{
   return dispatch=>{
     dispatch(authLoading());
-    authObject={
+    const authObject={
       email:email,
       password:password,
       returnSecureToken:true,
