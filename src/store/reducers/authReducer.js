@@ -2,6 +2,7 @@ import {
   AUTH_LOADING,
   AUTH_SUCCESS,
   AUTH_FAILED,
+  AUTH_SIGNOUT,
 } from '../actions/actionTypes';
 import {updateObject} from '../utility'
 const initialState = {
@@ -29,11 +30,16 @@ const authFailed = (state,action)=>{
     error:action.errorMsg,
   });
 }
+
+const authSignout=(state,action)=>{
+  return updateObject (state,{token:null,userId:null});
+}
 const reducer = (state=initialState,action)=>{
   switch (action.type) {
     case AUTH_LOADING : return authLoading (state,action);
     case AUTH_SUCCESS : return authSuccess(state,action);
     case AUTH_FAILED  : return authFailed (state,action);
+    case AUTH_SIGNOUT : return authSignout (state,action);
     default:return state;
   }
 }
