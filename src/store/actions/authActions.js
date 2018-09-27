@@ -27,7 +27,7 @@ const authFailed = (error)=>{
   }
 }
 
-const authSignout= ()=>{
+export const authSignout= ()=>{
   return {
     type:AUTH_SIGNOUT
   }
