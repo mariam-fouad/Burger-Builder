@@ -17,6 +17,8 @@ class BurgerBuilder extends Component {
     this.props.initialIngredient();
   }
   checkingOut =()=>{
+    if(!this.props.isAuth)
+      this.props.history.push('/authentication');
     this.setState({checkingOut:true});
   }
   cancelingCheckOutHandler =()=>{
@@ -45,7 +47,7 @@ class BurgerBuilder extends Component {
           remove={this.props.removeIngredient}
           add={this.props.addIngredient}
           price={this.props.totalPrice}
-          canCheckout={(countIngredient>0 && this.props.isAuth) ? false : true}
+          canCheckout={countIngredient>0 ? false : true}
           ordering={this.checkingOut}
           isAuth={this.props.isAuth}/>
         </React.Fragment>);
