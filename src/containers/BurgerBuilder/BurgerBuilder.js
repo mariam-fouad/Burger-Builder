@@ -46,7 +46,8 @@ class BurgerBuilder extends Component {
           add={this.props.addIngredient}
           price={this.props.totalPrice}
           canCheckout={countIngredient>0 ? false : true}
-          ordering={this.checkingOut}/>
+          ordering={this.checkingOut}
+          isAuth={this.props.isAuth}/>
         </React.Fragment>);
       insideModal= <OrderSummary
         ingredients ={this.props.ingredients}
@@ -71,6 +72,7 @@ const mapStateToProps=state=>{
     ingredients:state.burgerReducer.ingredients,
     totalPrice:state.burgerReducer.totalPrice,
     error : state.burgerReducer.error,
+    isAuth:state.authReducer.token !==null,
   };
 }
 
