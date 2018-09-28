@@ -17,8 +17,10 @@ class BurgerBuilder extends Component {
     this.props.initialIngredient();
   }
   checkingOut =()=>{
-    if(!this.props.isAuth)
+    if(!this.props.isAuth){
+      this.props.setAuthRedirectPath('./checkout')
       this.props.history.push('/authentication');
+    }
     this.setState({checkingOut:true});
   }
   cancelingCheckOutHandler =()=>{
@@ -84,6 +86,7 @@ const mapDispatchToProps=dispatch=>{
     removeIngredient:(ingredientType)=>dispatch(actions.removeIngredient(ingredientType)),
     initialIngredient: ()=> dispatch (actions.initialIngredient()),
     intialOrdered: ()=> dispatch (actions.intialOrdered()),
+    setAuthRedirectPath: (path)=> dispatch (actions.setAuthRedirectPath(path)),
   }
 }
 
