@@ -3,6 +3,7 @@ import classes from './Auth.css';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actionTypes from '../../store/actions/actionsIndex';
 class Auth extends Component {
@@ -112,9 +113,14 @@ class Auth extends Component {
           /> );
     }
     let form = <Spinner />;
+    let redirect = null;
+    if (this.props.isAuth){
+      redirect=<Redirect to="/" />
+    }
     if (!this.props.loading){
       form=(
         <div className={classes.Auth}>
+          {redirect}
           <h4>{this.state.isSignUp?
             'Sign up to our delisauce burger': 'Sign in to enjoy again'}</h4>
           {this.props.error? <h3>Error message : {this.props.error}</h3>: null}
@@ -138,6 +144,7 @@ const mapStateToProps=state=>{
   return{
     loading: state.authReducer.loading,
     error: state.authReducer.error,
+    isAuth: state.authReducer.token!==null,
   };
 }
 const mapDispatchToProps=dispatch=>{
