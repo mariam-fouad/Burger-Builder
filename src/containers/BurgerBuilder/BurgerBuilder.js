@@ -34,7 +34,6 @@ class BurgerBuilder extends Component {
       countIngredient+=ingredientsDisableInfo[key];
       ingredientsDisableInfo[key]=ingredientsDisableInfo[key]<=0;
     }
-    const activeButton= (countIngredient>0 && this.props.isAuth) ? false : true;
     let insideModal = null;
     let burger = this.props.error ? <p>Ingredients cannot be loaded</p>:<Spinner />;
     if (this.props.ingredients){
@@ -46,7 +45,7 @@ class BurgerBuilder extends Component {
           remove={this.props.removeIngredient}
           add={this.props.addIngredient}
           price={this.props.totalPrice}
-          canCheckout={activeButton}
+          canCheckout={(countIngredient>0 && this.props.isAuth) ? false : true}
           ordering={this.checkingOut}
           isAuth={this.props.isAuth}/>
         </React.Fragment>);
