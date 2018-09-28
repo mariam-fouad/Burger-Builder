@@ -3,6 +3,7 @@ import {
   AUTH_SUCCESS,
   AUTH_FAILED,
   AUTH_SIGNOUT,
+  SET_AUTH_REDIRECT_PATH,
 } from './actionTypes';
 import axios from 'axios';
 
@@ -12,6 +13,12 @@ const authLoading = ()=>{
   };
 }
 
+export const setAuthRedirectPath =(path)=>{
+  return{
+    type:SET_AUTH_REDIRECT_PATH,
+    path:path,
+  };
+};
 const authSuccess= (token,userId)=>{
   return {
     type:AUTH_SUCCESS,
