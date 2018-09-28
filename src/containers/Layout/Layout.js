@@ -21,8 +21,8 @@ class Layout extends Component{
     }
     return (
       <React.Fragment>
-        <Toolbar toogle={this.toogleSideDrawerHandler} />
-        <SideDrawer toogle={this.toogleSideDrawerHandler} closed={this.closeSideDrawerHandler} show={this.state.showSideDrawer}/>
+        <Toolbar toogle={this.toogleSideDrawerHandler} isAuth={this.props.isAuth}/>
+        <SideDrawer toogle={this.toogleSideDrawerHandler} closed={this.closeSideDrawerHandler} show={this.state.showSideDrawer} isAuth={this.props.isAuth}/>
         <main style ={styleMain}>
           {this.props.children}
         </main>
