@@ -5,7 +5,7 @@ import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import * as actionTypes from '../../store/actions/actionsIndex';
+import * as actions from '../../store/actions/actionsIndex';
 class Auth extends Component {
   state={
     controls:{
@@ -97,6 +97,11 @@ class Auth extends Component {
       return {isSignUp:!prevState.isSignUp,}
     });
   }
+  componentDidMount(){
+    if(this.props.authRedirectPath!=='/'&& !this.props.buildingBurger){
+      this.props.onSetAuthRedirectPath();
+    }
+  }
   render (){
     const formArray= [];
     for (let input in this.state.controls){
@@ -115,7 +120,7 @@ class Auth extends Component {
     let form = <Spinner />;
     let redirect = null;
     if (this.props.isAuth){
-      redirect=<Redirect to="/" />
+      redirect=<Redirect to={this.props.authRedirectPath} />
     }
     if (!this.props.loading){
       form=(
@@ -145,11 +150,14 @@ const mapStateToProps=state=>{
     loading: state.authReducer.loading,
     error: state.authReducer.error,
     isAuth: state.authReducer.token!==null,
+    buildingBurger: state.burgerReducer.building,
+    authRedirectPath: state.authReducer.authRedirectPath,
   };
 }
 const mapDispatchToProps=dispatch=>{
   return {
-    onAuthStart : (email,password,isSignUp)=> dispatch (actionTypes.authStart(email,password,isSignUp)),
+    onAuthStart : (email,password,isSignUp)=> dispatch (actions.authStart(email,password,isSignUp)),
+    onSetAuthRedirectPath: ()=> dispatch(actions.setAuthRedirectPath('/')),
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Auth);
