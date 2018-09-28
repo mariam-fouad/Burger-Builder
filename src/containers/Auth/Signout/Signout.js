@@ -6,13 +6,13 @@ class Signout extends Component{
     this.props.sigingout();
   }
   render(){
-    return ();
+    return <h1>ghhg</h1>;
   }
 }
 
 const mapDispatchToProps= dispatch=>{
   return {
-    sigingout: ()=>dispatch(actions.authSignout),
+    sigingout: ()=>dispatch(actions.authSignout()),
   }
 }
 export default connect(null, mapDispatchToProps)(Signout);
