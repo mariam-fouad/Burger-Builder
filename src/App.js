@@ -6,7 +6,6 @@ import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 import Auth from './containers/Auth/Auth';
 import Signout from './containers/Auth/Signout/Signout';
 import Orders from './containers/Orders/Orders';
-import Radium ,{StyleRoot}from 'radium';
 import Checkout from './containers/Checkout/Checkout'
 import * as actions from './store/actions/actionsIndex';
 import {connect} from 'react-redux';
@@ -16,7 +15,6 @@ class App extends Component {
   }
   render() {
     return (
-        <StyleRoot>
           <div className="App">
             <Layout>
               <Switch>
@@ -28,7 +26,6 @@ class App extends Component {
               </Switch>
             </Layout>
           </div>
-        </StyleRoot>
     );
   }
 }
@@ -38,4 +35,4 @@ const mapDispatchToProps = dispatch=>{
     recoverAuthData: ()=> dispatch (actions.recoverAuthData()),
   }
 }
-export default Radium(withRouter(connect(null,mapDispatchToProps)(App)));
+export default withRouter(connect(null,mapDispatchToProps)(App));
