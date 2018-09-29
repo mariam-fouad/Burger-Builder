@@ -15,7 +15,6 @@ class BurgerBuilder extends Component {
   }
   componentDidMount(){
     this.props.initialIngredient();
-    this.props.recoverAuthData();
   }
   checkingOut =()=>{
     if(!this.props.isAuth){
@@ -88,7 +87,6 @@ const mapDispatchToProps=dispatch=>{
     initialIngredient: ()=> dispatch (actions.initialIngredient()),
     intialOrdered: ()=> dispatch (actions.intialOrdered()),
     setAuthRedirectPath: (path)=> dispatch (actions.setAuthRedirectPath(path)),
-    recoverAuthData: ()=> dispatch (actions.recoverAuthData()),
   }
 }
 

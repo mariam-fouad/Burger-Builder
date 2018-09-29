@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch , Route} from 'react-router-dom'
+import { Switch , Route ,withRouter} from 'react-router-dom'
 import './App.css';
 import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
@@ -8,7 +8,12 @@ import Signout from './containers/Auth/Signout/Signout';
 import Orders from './containers/Orders/Orders';
 import Radium ,{StyleRoot}from 'radium';
 import Checkout from './containers/Checkout/Checkout'
+import * as actions from './store/actions/actionsIndex';
+import {connect} from 'react-redux';
 class App extends Component {
+  componentDidMount(){
+    this.props.recoverAuthData();
+  }
   render() {
     return (
         <StyleRoot>
@@ -28,4 +33,9 @@ class App extends Component {
   }
 }
 
-export default Radium(App);
+const mapDispatchToProps = dispatch=>{
+  return{
+    recoverAuthData: ()=> dispatch (actions.recoverAuthData()),
+  }
+}
+export default Radium(withRouter(connect(null,mapDispatchToProps)(App)));
