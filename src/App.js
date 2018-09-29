@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch , Route ,withRouter} from 'react-router-dom'
+import { Switch , Route ,withRouter,Redirect} from 'react-router-dom'
 import './App.css';
 import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
@@ -18,6 +18,7 @@ class App extends Component {
       <Switch>
         <Route  path="/authentication" component={Auth}/>
         <Route exact path="/" component={BurgerBuilder}/>
+        <Redirect to='/'/>
       </Switch>
     );
     if (this.props.isAuth){
@@ -27,6 +28,7 @@ class App extends Component {
           <Route  path="/orders" component={Orders}/>
           <Route  path="/signout" component={Signout}/>
           <Route exact path="/" component={BurgerBuilder}/>
+          <Redirect to='/'/>
         </Switch>);
     }
     return (
