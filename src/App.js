@@ -14,25 +14,39 @@ class App extends Component {
     this.props.recoverAuthData();
   }
   render() {
+    let routeSwitch= (
+      <Switch>
+        <Route  path="/authentication" component={Auth}/>
+        <Route exact path="/" component={BurgerBuilder}/>
+      </Switch>
+    );
+    if (this.props.isAuth){
+      routeSwitch=(
+        <Switch>
+          <Route  path="/checkout" component={Checkout}/>
+          <Route  path="/orders" component={Orders}/>
+          <Route  path="/signout" component={Signout}/>
+          <Route exact path="/" component={BurgerBuilder}/>
+        </Switch>);
+    }
     return (
           <div className="App">
             <Layout>
-              <Switch>
-                <Route  path="/checkout" component={Checkout}/>
-                <Route  path="/orders" component={Orders}/>
-                <Route  path="/authentication" component={Auth}/>
-                <Route  path="/signout" component={Signout}/>
-                <Route exact path="/" component={BurgerBuilder}/>
-              </Switch>
+              {routeSwitch}
             </Layout>
           </div>
     );
   }
 }
 
+const mapStateToProps = state=>{
+  return {
+    isAuth: state.authReducer.token !== null,
+  }
+}
 const mapDispatchToProps = dispatch=>{
   return{
     recoverAuthData: ()=> dispatch (actions.recoverAuthData()),
   }
 }
-export default withRouter(connect(null,mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(App));
