@@ -87,7 +87,7 @@ export const recoverAuthData = ()=>{
       const userId = localStorage.getItem('userId');
       if (expiryData > new Date()){
         dispatch(authSuccess(token,userId));
-        dispatch(signoutTimeout(expiryData - new Date()));
+        dispatch(signoutTimeout((expiryData.getTime() - new Date().getTime()) / 1000) );
       }
       else{
         dispatch (authSignout());
