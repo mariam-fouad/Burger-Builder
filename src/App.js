@@ -10,7 +10,7 @@ import Checkout from './containers/Checkout/Checkout'
 import * as actions from './store/actions/actionsIndex';
 import {connect} from 'react-redux';
 class App extends Component {
-  componentDidMount(){
+  componentWillMount(){
     this.props.recoverAuthData();
   }
   render() {
