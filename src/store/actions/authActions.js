@@ -78,3 +78,24 @@ export const authStart= (email,password,isSignUp)=>{
       })
   }
 }
+
+export const recoverAuthData = ()=>{
+  return dispatch=>{
+    const token = localStorage.getItem('token');
+    if(token){
+      const expiryData = new Date (localStorage.getItem('expiryData'));
+      const userId = localStorage.getItem('userId');
+      if (expiryData > new Date()){
+        dispatch(authSuccess(token,userId));
+        dispatch(signoutTimeout(expiryData - new Date()));
+      }
+      else{
+        dispatch (authSignout());
+      }
+    }
+    else{
+      dispatch (authSignout());
+    }
+
+  }
+}
