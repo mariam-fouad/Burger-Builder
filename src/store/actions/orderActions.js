@@ -62,7 +62,8 @@ const fetchingOrdersSuccess=(orders)=>{
 export const fetchingOrders = ()=>{
   return (dispatch,getState)=>{
     dispatch(fetchingOrdersLoading());
-    axios.get('/orders.json?auth='+getState().authReducer.token)
+    const queryParm = '?auth='+getState().authReducer.token +'&orderBy="userId"&equalTo="'+getState().authReducer.userId+'"';
+    axios.get('/orders.json'+queryParm)
       .then(response=>{
         const fetchedOrders=[];
         for (let key in response.data){
