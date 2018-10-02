@@ -3,12 +3,22 @@ import { Switch , Route ,withRouter,Redirect} from 'react-router-dom'
 import './App.css';
 import Layout from './containers/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
-import Auth from './containers/Auth/Auth';
-import Signout from './containers/Auth/Signout/Signout';
-import Orders from './containers/Orders/Orders';
-import Checkout from './containers/Checkout/Checkout'
 import * as actions from './store/actions/actionsIndex';
 import {connect} from 'react-redux';
+import asyncComponent from './hoc/asyncComponent/asyncComponent'
+
+const asyncCheckout = asyncComponent(()=>{
+  return import('./containers/Checkout/Checkout');
+});
+const asyncAuth = asyncComponent(()=>{
+  return import('./containers/Auth/Auth');
+});
+const asyncOrders = asyncComponent(()=>{
+  return import('./containers/Orders/Orders');
+});
+const asyncSignout = asyncComponent(()=>{
+  return import('./containers/Auth/Signout/Signout');
+});
 class App extends Component {
   componentWillMount(){
     this.props.recoverAuthData();
@@ -16,7 +26,7 @@ class App extends Component {
   render() {
     let routeSwitch= (
       <Switch>
-        <Route  path="/authentication" component={Auth}/>
+        <Route  path="/authentication" component={asyncAuth}/>
         <Route exact path="/" component={BurgerBuilder}/>
         <Redirect to='/'/>
       </Switch>
@@ -24,10 +34,10 @@ class App extends Component {
     if (this.props.isAuth){
       routeSwitch=(
         <Switch>
-          <Route  path="/authentication" component={Auth}/>
-          <Route  path="/checkout" component={Checkout}/>
-          <Route  path="/orders" component={Orders}/>
-          <Route  path="/signout" component={Signout}/>
+          <Route  path="/authentication" component={asyncAuth}/>
+          <Route  path="/checkout" component={asyncCheckout}/>
+          <Route  path="/orders" component={asyncOrders}/>
+          <Route  path="/signout" component={asyncSignout}/>
           <Route exact path="/" component={BurgerBuilder}/>
           <Redirect to='/'/>
         </Switch>);
