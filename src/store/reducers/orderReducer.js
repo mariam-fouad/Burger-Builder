@@ -6,7 +6,7 @@ import {
   FETCHING_ORDERS_LOADING,
   FETCHING_ORDERS_SUCCESS,
   FETCHING_ORDERS_FAILED,} from '../actions/actionTypes';
-import {updateObject} from '../utility';
+import {updateObject} from '../../shared/utility';
 const intialState={
   orders:[],
   loading:false,

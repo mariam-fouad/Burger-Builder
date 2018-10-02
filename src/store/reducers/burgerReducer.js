@@ -4,7 +4,7 @@ import {
   INITIAL_INGREDIENT,
   ERROR_GETTING_INGREDIENT,
 } from '../actions/actionTypes';
-import {updateObject} from '../utility'
+import {updateObject} from '../../shared/utility'
 const INGREDIENTS_PRICES ={
   Salad:0.4,
   Bacon:0.8,
