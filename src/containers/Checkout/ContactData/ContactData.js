@@ -7,7 +7,7 @@ import Input from '../../../components/UI/Input/Input';
 import {connect} from 'react-redux';
 import errorHandler from '../../../hoc/errorHandler/errorHandler';
 import * as actions from '../../../store/actions/actionsIndex';
-import {updateObject} from '../../../shared/utility';
+import {updateObject,validateInput} from '../../../shared/utility';
 class ContactData extends Component{
   state={
     orderInfo:{
@@ -135,32 +135,7 @@ class ContactData extends Component{
     },
     isFormValid:false,
   }
-  validateInput =(value,rules)=>{
-    let isValid = true;
-    const trimedValue = value.trim();
-    if(!rules){
-      return true;
-    }
-    if(rules.required){
-      isValid= trimedValue!=='' &&isValid;
-    }
-    if(rules.minLength){
-      isValid= trimedValue.length >= rules.minLength &&isValid;
-    }
-    if(rules.maxLength){
-      isValid= trimedValue.length <= rules.maxLength &&isValid;
-    }
-    if (rules.isEmail) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test(value) && isValid;
-    }
-    if (rules.isNumeric) {
-      const pattern = /^\d+$/;
-      isValid = pattern.test(value) && isValid;
-    }
 
-    return isValid;
-  }
   orderButtonHandler=(event)=>{
     event.preventDefault();
     const orderDetails={};
@@ -181,7 +156,7 @@ class ContactData extends Component{
       [orderKey]:updateObject (this.state.orderInfo[orderKey],{
         value:event.target.value,
         touched:true,
-        valid:this.validateInput(event.target.value,this.state.orderInfo[orderKey].validation),
+        valid:validateInput(event.target.value,this.state.orderInfo[orderKey].validation),
       })
     });
 
