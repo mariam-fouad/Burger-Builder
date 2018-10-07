@@ -7,8 +7,17 @@ import NavigationItem from './NavigationItem/NavigationItem';
 
 configure({adapter: new Adapter()});
 describe('<NavigationItems/>',()=>{
+  let wrapper;
+  beforeEach(()=>{
+    wrapper = shallow(<NavigationItems/>);
+  });
+
   it('should return two <NavigationItem/> if not Auth',()=>{
-    const wrapper = shallow(<NavigationItems/>);
     expect(wrapper.find(NavigationItem)).toHaveLength(2);
+  });
+
+  it('should return Three <NavigationItem/> if Auth',()=>{
+    wrapper.setProps({isAuth:true});
+    expect(wrapper.find(NavigationItem)).toHaveLength(3);
   });
 });
