@@ -9,7 +9,7 @@ import axios from '../../order-axios';
 import {connect} from 'react-redux';
 import * as actions from '../../store/actions/actionsIndex';
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
   state={
     checkingOut : false,
   }
