@@ -1,4 +1,7 @@
 <h1>Burger Builder</h1>
+
+<a href='https://my-burger-builder-f70e6.firebaseapp.com'>Click her for life demo</a>
+
 <p>Written with React.js styled with CSS Models and some inline styling.</p>
 <p>Tested with jest and enzyme</p>
 <h2> How to use it </h2>
