@@ -6,7 +6,7 @@ import {
   SET_AUTH_REDIRECT_PATH
 } from '../actions/actionTypes';
 import {updateObject} from '../../shared/utility'
-const initialState = {
+export const initialState = {
   token:null,
   userId:null,
   error:null,
