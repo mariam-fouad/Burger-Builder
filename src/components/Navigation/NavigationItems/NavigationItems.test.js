@@ -20,4 +20,9 @@ describe('<NavigationItems/>',()=>{
     wrapper.setProps({isAuth:true});
     expect(wrapper.find(NavigationItem)).toHaveLength(3);
   });
+
+  it('should <NavigationItem>logout</NavigationItem> if Auth',()=>{
+    wrapper.setProps({isAuth:true});
+    expect(wrapper.contains(<NavigationItem link="/signout">Sign out</NavigationItem>)).toEqual(true);
+  });
 });
