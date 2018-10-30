@@ -4,7 +4,7 @@ import {
     AUTH_FAILED,
     AUTH_SIGNOUT,
     SET_AUTH_REDIRECT_PATH,
-  } from './actionTypes';
+  } from '../actions/actionTypes';
 
   import {put} from 'redux-saga/effects';
 
