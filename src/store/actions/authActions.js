@@ -3,13 +3,14 @@ import {
   AUTH_SUCCESS,
   AUTH_FAILED,
   AUTH_SIGNOUT,
+  AUTH_USER,
   AUTH_CHECK_TIMEOUT,
   AUTH_INITIAL_SIGNOUT,
   SET_AUTH_REDIRECT_PATH,
 } from './actionTypes';
 import axios from 'axios';
 
-const authLoading = ()=>{
+export const authLoading = ()=>{
   return {
     type:AUTH_LOADING,
   };
@@ -21,7 +22,7 @@ export const setAuthRedirectPath =(path)=>{
     path:path,
   };
 };
-const authSuccess= (token,userId)=>{
+export const authSuccess= (token,userId)=>{
   return {
     type:AUTH_SUCCESS,
     token:token,
@@ -29,7 +30,7 @@ const authSuccess= (token,userId)=>{
   }
 }
 
-const authFailed = (error)=>{
+export const authFailed = (error)=>{
   return {
     type:AUTH_FAILED,
     errorMsg:error,
@@ -47,7 +48,7 @@ export const authSignoutStarted = ()=>{
     type:AUTH_SIGNOUT
   }
 }
-const signoutTimeout = (timeout)=>{
+export const signoutTimeout = (timeout)=>{
   return {
     type: AUTH_CHECK_TIMEOUT,
     timeout:timeout,
@@ -55,31 +56,11 @@ const signoutTimeout = (timeout)=>{
 }
 
 export const authStart= (email,password,isSignUp)=>{
-  return dispatch=>{
-    dispatch(authLoading());
-    const authObject={
-      email:email,
-      password:password,
-      returnSecureToken:true,
-    }
-    let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyAHKdQmU1l-OX0c-xPEC3Bjh8p_gFM3V44';
-    if (!isSignUp){
-      url='https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyAHKdQmU1l-OX0c-xPEC3Bjh8p_gFM3V44';
-    }
-    axios.post(url,authObject)
-      .then(response=>{
-        console.log(response);
-        const expiryData = new Date (new Date().getTime()+ (response.data.expiresIn*1000));
-        localStorage.setItem('expiryData',expiryData);
-        localStorage.setItem('token',response.data.idToken);
-        localStorage.setItem('userId',response.data.localId);
-        dispatch(authSuccess(response.data.idToken,response.data.localId));
-        dispatch (signoutTimeout(response.data.expiresIn));
-      })
-      .catch(error=>{
-        console.log(error);
-        dispatch(authFailed(error.response.data.error.message));
-      })
+  return {
+    type: AUTH_USER,
+    email: email,
+    password : password,
+    isSignUp : isSignUp,
   }
 }
 
