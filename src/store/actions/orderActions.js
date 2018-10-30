@@ -1,4 +1,5 @@
 import {
+  ORDERING_BURGER_START,
   ORDERING_BURGER_SUCCESS,
   ORDERING_BURGER_FAILED,
   ORDERING_BURGER_LOADING,
@@ -7,7 +8,7 @@ import {
   FETCHING_ORDERS_SUCCESS,
   FETCHING_ORDERS_FAILED,} from './actionTypes';
 import axios from '../../order-axios';
-const orderingBurgerSuccees = (id , orderData)=>{
+export const orderingBurgerSuccees = (id , orderData)=>{
   return {
     type:ORDERING_BURGER_SUCCESS,
     id:id,
@@ -15,45 +16,39 @@ const orderingBurgerSuccees = (id , orderData)=>{
   };
 }
 
-const orderingBurgerFailed = (error)=>{
+export const orderingBurgerFailed = (error)=>{
   return {
     type:ORDERING_BURGER_FAILED,
     error:error,
   }
 }
 
-const orderingBurrgerLoading = ()=>{
+export const orderingBurrgerLoading = ()=>{
   return {
     type:ORDERING_BURGER_LOADING,
   }
 }
 export const orderingBurger = (orderInfo,token)=>{
-  return dispatch=>{
-    dispatch(orderingBurrgerLoading());
-    axios.post('/orders.json?auth='+token,orderInfo)
-      .then (response =>{
-        dispatch(orderingBurgerSuccees(response.data.name,orderInfo));
-
-      })
-      .catch (error =>{
-        dispatch(orderingBurgerFailed(error));
-      });
+  return {
+    type: ORDERING_BURGER_START,
+    orderInfo:orderInfo,
+    token: token,
   }
 };
 
-const fetchingOrdersLoading= ()=>{
+export const fetchingOrdersLoading= ()=>{
   return {
     type:FETCHING_ORDERS_LOADING,
   };
 }
 
-const fetchingOrdersFailed =(error)=>{
+export const fetchingOrdersFailed =(error)=>{
   return{
     type:FETCHING_ORDERS_FAILED,
     error:error,
   }
 }
-const fetchingOrdersSuccess=(orders)=>{
+export const fetchingOrdersSuccess=(orders)=>{
   return{
     type:FETCHING_ORDERS_SUCCESS,
     orders:orders,
