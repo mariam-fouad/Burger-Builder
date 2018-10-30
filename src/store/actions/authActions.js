@@ -3,6 +3,7 @@ import {
   AUTH_SUCCESS,
   AUTH_FAILED,
   AUTH_SIGNOUT,
+  AUTH_CHECK_TIMEOUT,
   AUTH_INITIAL_SIGNOUT,
   SET_AUTH_REDIRECT_PATH,
 } from './actionTypes';
@@ -47,10 +48,9 @@ export const authSignoutStarted = ()=>{
   }
 }
 const signoutTimeout = (timeout)=>{
-  return dispatch=>{
-    (setTimeout(function () {
-      dispatch(authSignout());
-    }, timeout*1000));
+  return {
+    type: AUTH_CHECK_TIMEOUT,
+    timeout:timeout,
   }
 }
 
