@@ -36,11 +36,14 @@ const authFailed = (error)=>{
 }
 
 export const authSignout= ()=>{
-  // localStorage.removeItem('expiryData');
-  // localStorage.removeItem('token');
-  // localStorage.removeItem('userId');
   return {
     type:AUTH_INITIAL_SIGNOUT
+  }
+}
+
+export const authSignoutStarted = ()=>{
+  return {
+    type:AUTH_SIGNOUT
   }
 }
 const signoutTimeout = (timeout)=>{
