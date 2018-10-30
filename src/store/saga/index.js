@@ -17,4 +17,5 @@ export function* watchBurger (){
 
 export function* watchOrder(){
     yield takeEvery (actionTypes.ORDERING_BURGER_START , orderSaga.orderingBurger);
+    yield takeEvery (actionTypes.FETCHING_ORDERS_START , orderSaga.fetchingOrders);
 }

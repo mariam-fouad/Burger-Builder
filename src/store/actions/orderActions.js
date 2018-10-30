@@ -6,7 +6,9 @@ import {
   INITIAL_ORDERED,
   FETCHING_ORDERS_LOADING,
   FETCHING_ORDERS_SUCCESS,
-  FETCHING_ORDERS_FAILED,} from './actionTypes';
+  FETCHING_ORDERS_FAILED,
+  FETCHING_ORDERS_START,
+} from './actionTypes';
 import axios from '../../order-axios';
 export const orderingBurgerSuccees = (id , orderData)=>{
   return {
@@ -55,26 +57,9 @@ export const fetchingOrdersSuccess=(orders)=>{
   };
 }
 export const fetchingOrders = ()=>{
-  return (dispatch,getState)=>{
-    dispatch(fetchingOrdersLoading());
-    const queryParm = '?auth='+getState().authReducer.token +'&orderBy="userId"&equalTo="'+getState().authReducer.userId+'"';
-    axios.get('/orders.json'+queryParm)
-      .then(response=>{
-        const fetchedOrders=[];
-        for (let key in response.data){
-          fetchedOrders.push(
-            {
-              ...response.data[key],
-              id:key,
-            }
-          );
-        }
-        dispatch(fetchingOrdersSuccess(fetchedOrders));
-      })
-      .catch(error =>{
-        dispatch(fetchingOrdersFailed(error));
-      });
-  };
+  return {
+    type:FETCHING_ORDERS_START,
+  }
 };
 
 export const intialOrdered =()=>{
