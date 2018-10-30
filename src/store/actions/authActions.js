@@ -1,4 +1,5 @@
 import {
+  AUTH_RECOVER_STATE,
   AUTH_LOADING,
   AUTH_SUCCESS,
   AUTH_FAILED,
@@ -8,7 +9,6 @@ import {
   AUTH_INITIAL_SIGNOUT,
   SET_AUTH_REDIRECT_PATH,
 } from './actionTypes';
-import axios from 'axios';
 
 export const authLoading = ()=>{
   return {
@@ -65,22 +65,7 @@ export const authStart= (email,password,isSignUp)=>{
 }
 
 export const recoverAuthData = ()=>{
-  return dispatch=>{
-    const token = localStorage.getItem('token');
-    if(token){
-      const expiryData = new Date (localStorage.getItem('expiryData'));
-      const userId = localStorage.getItem('userId');
-      if (expiryData > new Date()){
-        dispatch(authSuccess(token,userId));
-        dispatch(signoutTimeout((expiryData.getTime() - new Date().getTime()) / 1000) );
-      }
-      else{
-        dispatch (authSignout());
-      }
-    }
-    else{
-      dispatch (authSignout());
-    }
-
+  return {
+    type : AUTH_RECOVER_STATE
   }
 }

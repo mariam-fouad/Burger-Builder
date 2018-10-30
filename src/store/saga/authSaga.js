@@ -44,3 +44,21 @@ export function* authUser (action){
     
       
 }
+
+export function* recoverAuthData (){
+    const token = yield localStorage.getItem('token');
+    if(token){
+        const expiryData = yield new Date (localStorage.getItem('expiryData'));
+        const userId = yield localStorage.getItem('userId');
+        if (expiryData > new Date()){
+            yield put (authActions.authSuccess(token,userId));
+            yield put (authActions.signoutTimeout((expiryData.getTime() - new Date().getTime()) / 1000) );
+        }
+        else{
+            yield put (authActions.authSignout());
+        }
+    }
+    else{
+        yield put (authActions.authSignout());
+    }
+}
