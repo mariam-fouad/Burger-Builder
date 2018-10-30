@@ -9,7 +9,7 @@ import {
   FETCHING_ORDERS_FAILED,
   FETCHING_ORDERS_START,
 } from './actionTypes';
-import axios from '../../order-axios';
+
 export const orderingBurgerSuccees = (id , orderData)=>{
   return {
     type:ORDERING_BURGER_SUCCESS,
