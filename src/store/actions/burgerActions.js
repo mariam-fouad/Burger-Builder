@@ -3,8 +3,9 @@ import {
   REMOVE_INGREDIENT,
   INITIAL_INGREDIENT,
   ERROR_GETTING_INGREDIENT,
+  START_INIT_INGREDIENT,
 } from './actionTypes';
-import axios from '../../order-axios';
+
 
 export const addIngredient =(ingredientType)=>{
   return{
@@ -20,25 +21,20 @@ export const removeIngredient =(ingredientType)=>{
   }
 };
 
-const setIngredient =(ing)=>{
+export const setIngredient =(ing)=>{
   return{
     type:INITIAL_INGREDIENT,
     ingredientsObject: ing,
   }
 }
 
-const catchError = ()=>{
+export const catchError = ()=>{
   return {
     type:ERROR_GETTING_INGREDIENT,
   }
 }
 export const initialIngredient = ()=>{
-  return dispatch=>{
-    axios.get('/ingredients.json')
-      .then (response=>{
-        dispatch(setIngredient(response.data));
-      }).catch(error =>{
-        dispatch(catchError());
-    });
+  return {
+    type: START_INIT_INGREDIENT
   }
 }
