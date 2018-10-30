@@ -3,6 +3,7 @@ import {
   AUTH_SUCCESS,
   AUTH_FAILED,
   AUTH_SIGNOUT,
+  AUTH_INITIAL_SIGNOUT,
   SET_AUTH_REDIRECT_PATH,
 } from './actionTypes';
 import axios from 'axios';
@@ -35,11 +36,11 @@ const authFailed = (error)=>{
 }
 
 export const authSignout= ()=>{
-  localStorage.removeItem('expiryData');
-  localStorage.removeItem('token');
-  localStorage.removeItem('userId');
+  // localStorage.removeItem('expiryData');
+  // localStorage.removeItem('token');
+  // localStorage.removeItem('userId');
   return {
-    type:AUTH_SIGNOUT
+    type:AUTH_INITIAL_SIGNOUT
   }
 }
 const signoutTimeout = (timeout)=>{
