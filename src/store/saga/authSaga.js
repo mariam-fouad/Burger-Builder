@@ -8,7 +8,7 @@ import {
 
   import {put} from 'redux-saga/effects';
 
-function* authSignout(action){
+export function* authSignout(action){
     yield localStorage.removeItem('expiryData');
     yield localStorage.removeItem('token');
     yield localStorage.removeItem('userId');
